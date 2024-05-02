@@ -1,0 +1,81 @@
+==================
+basic
+==================
+
+123
+0b01010
+0o2345
+0xaf01
+2.34e-1
+"hello"
+'x'
+true
+false
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (operand
+        (dec_literal))))
+  (expr_stmt
+    (expr
+      (operand
+        (bin_literal))))
+  (expr_stmt
+    (expr
+      (operand
+        (oct_literal))))
+  (expr_stmt
+    (expr
+      (operand
+        (hex_literal))))
+  (expr_stmt
+    (expr
+      (operand
+        (dec_literal))))
+  (expr_stmt
+    (expr
+      (operand
+        (string_literal
+          (string_content)))))
+  (expr_stmt
+    (expr
+      (operand
+        (char_literal
+          (character)))))
+  (expr_stmt
+    (expr
+      (operand)))
+  (expr_stmt
+    (expr
+      (operand))))
+
+==================
+with suffix
+==================
+
+123u8
+"hello"str
+'x'b
+
+---
+(source_file
+  (expr_stmt
+    (expr
+      (operand
+        (dec_literal
+          (identifier)))))
+  (expr_stmt
+    (expr
+      (operand
+        (string_literal
+          (string_content)
+          (identifier)))))
+  (expr_stmt
+    (expr
+      (operand
+        (char_literal
+          (character)
+          (identifier))))))

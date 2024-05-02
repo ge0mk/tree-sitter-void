@@ -1,0 +1,78 @@
+==================
+if
+==================
+
+if true {}
+
+---
+
+(source_file
+  (if_stmt
+    (expr
+      (operand))
+    (compound_stmt)))
+
+==================
+if-else
+==================
+
+if true {
+} else {
+}
+
+---
+
+(source_file
+  (if_stmt
+    (expr
+      (operand))
+    (compound_stmt)
+    (compound_stmt)))
+
+==================
+if-else-if
+==================
+
+if true {
+} else if true {
+}
+
+---
+
+(source_file
+  (if_stmt
+    (expr
+      (operand))
+    (compound_stmt)
+    (if_stmt
+      (expr
+        (operand))
+      (compound_stmt))))
+
+==================
+while
+==================
+
+while true {}
+
+---
+
+(source_file
+  (while_stmt
+    (expr
+      (operand))
+    (compound_stmt)))
+
+==================
+do-while
+==================
+
+do {} while true
+
+---
+
+(source_file
+  (do_while_stmt
+    (compound_stmt)
+    (expr
+      (operand))))

@@ -1,0 +1,55 @@
+==================
+basic
+==================
+
+foo
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (operand
+        (name
+          (name_segment
+            (identifier)))))))
+
+==================
+namespaces
+==================
+
+foo::bar::baz
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (operand
+        (name
+          (name_segment
+            (identifier))
+          (name_segment
+            (identifier))
+          (name_segment
+            (identifier)))))))
+
+==================
+template parameters
+==================
+
+foo!<1, 2>
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (operand
+        (name
+          (name_segment
+            (identifier)
+              (operand
+                (dec_literal))
+              (operand
+                (dec_literal))))))))

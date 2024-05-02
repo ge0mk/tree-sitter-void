@@ -1,0 +1,72 @@
+==================
+prefix operator
+==================
+
+!true
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (prefix_operator)
+      (expr
+        (operand)))))
+
+==================
+postfix operator
+==================
+
+foo++
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (expr
+        (operand
+          (name
+            (name_segment
+              (identifier))))))))
+
+==================
+binary operator
+==================
+
+1 + 2
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (expr
+        (operand
+          (dec_literal)))
+      (expr
+        (operand
+          (dec_literal))))))
+
+
+==================
+member-call operator
+==================
+
+foo.operator +()
+
+---
+
+(source_file
+  (expr_stmt
+    (expr
+      (operand
+        (operand
+          (operand
+            (name
+              (name_segment
+                (identifier))))
+          (operand
+            (name
+              (name_segment
+                (operator_name)))))))))

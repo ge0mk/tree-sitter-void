@@ -1,0 +1,153 @@
+==================
+basic
+==================
+
+func foo() -> int {}
+
+---
+
+(source_file
+  (function_decl
+    (identifier)
+    (function_signature
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body
+      (compound_stmt))))
+
+==================
+template parameters
+==================
+
+template <T: type>
+func foo() -> T {}
+
+---
+
+(source_file
+  (function_decl
+    (template_parameter_decl
+      (template_parameter
+        (identifier)
+        (identifier)))
+    (identifier)
+    (function_signature
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body
+      (compound_stmt))))
+
+==================
+annotations
+==================
+
+@[extern_name: "foo"]
+func foo() -> int {}
+
+---
+
+(source_file
+  (function_decl
+    (annotations
+      (annotation
+        (identifier)
+        (string_literal
+          (string_content))))
+    (identifier)
+    (function_signature
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body
+      (compound_stmt))))
+
+==================
+default body
+==================
+
+func foo() -> int = default
+
+---
+
+(source_file
+  (function_decl
+    (identifier)
+    (function_signature
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body)))
+
+==================
+extern body
+==================
+
+func foo() -> int = extern
+
+---
+
+(source_file
+  (function_decl
+    (identifier)
+    (function_signature
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body)))
+
+==================
+parameters
+==================
+
+func foo(x: uint, y: int) -> int {}
+
+---
+
+(source_file
+  (function_decl
+    (identifier)
+    (function_signature
+      (parameter_decl
+        (identifier)
+        (type
+          (name
+            (name_segment
+              (identifier)))))
+      (parameter_decl
+        (identifier)
+        (type
+          (name
+            (name_segment
+              (identifier)))))
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body
+      (compound_stmt))))
+
+==================
+operator
+==================
+
+func +() -> int {}
+
+---
+
+(source_file
+  (function_decl
+    (operator_name)
+    (function_signature
+      (type
+        (name
+          (name_segment
+            (identifier)))))
+    (function_body
+      (compound_stmt))))
