@@ -113,6 +113,25 @@
     "fields": {}
   },
   {
+    "type": "call_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expr_list",
+          "named": true
+        },
+        {
+          "type": "operand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "char_literal",
     "named": true,
     "fields": {},
@@ -660,6 +679,25 @@
     }
   },
   {
+    "type": "index_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expr_list",
+          "named": true
+        },
+        {
+          "type": "operand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "match_case_decl",
     "named": true,
     "fields": {},
@@ -881,6 +919,21 @@
     }
   },
   {
+    "type": "member_access_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "operand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "name",
     "named": true,
     "fields": {},
@@ -976,7 +1029,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -989,6 +1042,10 @@
         },
         {
           "type": "bin_literal",
+          "named": true
+        },
+        {
+          "type": "call_expr",
           "named": true
         },
         {
@@ -1008,10 +1065,6 @@
           "named": true
         },
         {
-          "type": "expr_list",
-          "named": true
-        },
-        {
           "type": "function_reference_expr",
           "named": true
         },
@@ -1020,7 +1073,15 @@
           "named": true
         },
         {
+          "type": "index_expr",
+          "named": true
+        },
+        {
           "type": "match_expr",
+          "named": true
+        },
+        {
+          "type": "member_access_expr",
           "named": true
         },
         {
@@ -1033,10 +1094,6 @@
         },
         {
           "type": "oct_literal",
-          "named": true
-        },
-        {
-          "type": "operand",
           "named": true
         },
         {

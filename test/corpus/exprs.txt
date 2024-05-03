@@ -61,12 +61,14 @@ foo.operator +()
   (expr_stmt
     (expr
       (operand
-        (operand
+        (call_expr
+          (operand
+            (member_access_expr
+              (operand
+                (name
+                  (name_segment
+                    (identifier))))
           (operand
             (name
               (name_segment
-                (identifier))))
-          (operand
-            (name
-              (name_segment
-                (operator_name)))))))))
+                (operator_name)))))))))))

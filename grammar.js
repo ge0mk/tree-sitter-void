@@ -301,10 +301,10 @@ module.exports = grammar({
     expr_list: $ => seq($.expr, repeat(seq(',', $.expr)), optional(',')),
 
     operand: $ => choice(
-      prec.left(19, seq($.operand, '.', $.operand)),
+      $.member_access_expr,
 
-      prec.left(18, seq($.operand, '(', optional($.expr_list), ')')),
-      prec.left(18, seq($.operand, '[', $.expr_list, ']')),
+      $.call_expr,
+      $.index_expr,
 
       $.name,
       'true',
@@ -324,6 +324,10 @@ module.exports = grammar({
       $.anonymous_function_expr,
       $.function_reference_expr
     ),
+
+    member_access_expr: $ => prec.left(19, seq($.operand, '.', $.operand)),
+    call_expr: $ => prec.left(18, seq($.operand, '(', optional($.expr_list), ')')),
+    index_expr: $ => prec.left(18, seq($.operand, '[', $.expr_list, ']')),
 
     named_tuple_expr: $ => seq(
       '(',
