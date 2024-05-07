@@ -215,33 +215,9 @@ module.exports = grammar({
       optional(seq('=', $.operand))
     ),
 
-    type: $ => choice(
-      $.name,
-      seq('&', $.type),
-      seq('&&', $.type),
-      $.function_type,
-      $.named_tuple_type,
-      $.unnamed_tuple_type
-    ),
+    type: $ => $.operand,
 
-    function_type: $ => seq($.unnamed_tuple_type, '->', $.type),
-
-    named_tuple_type: $ => seq(
-      '(',
-      $.identifier, ':', $.type,
-      repeat(seq(',', $.identifier, ':', $.type)),
-      ')'
-    ),
-
-    unnamed_tuple_type: $ => seq(
-      '(',
-      optional(seq($.type, repeat(seq(',', $.type)))),
-      ')'
-    ),
-
-    name: $ => seq($.name_segment, repeat(seq('::', $.name_segment))),
-
-    name_segment: $ => prec.right(20, seq(
+    name: $ => prec.right(20, seq(
       choice(
         $.identifier,
         seq('operator', $.operator_name)
@@ -256,43 +232,43 @@ module.exports = grammar({
 
       prec.right(16, seq($.prefix_operator, $.expr)),
 
-      prec.left(15, seq($.expr, 'is', $.type)),
-      prec.left(15, seq($.expr, 'as', $.type)),
+      prec.left(15, seq(field('lhs', $.expr), 'is', field('rhs', $.type))),
+      prec.left(15, seq(field('lhs', $.expr), 'as', field('rhs', $.type))),
 
-      prec.left(14, seq($.expr, '??', $.expr)),
+      prec.left(14, seq(field('lhs', $.expr), '??', field('rhs', $.expr))),
 
-      prec.left(13, seq($.expr, '*', $.expr)),
-      prec.left(13, seq($.expr, '/', $.expr)),
-      prec.left(13, seq($.expr, '%', $.expr)),
+      prec.left(13, seq(field('lhs', $.expr), '*', field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), '/', field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), '%', field('rhs', $.expr))),
 
-      prec.left(12, seq($.expr, '+', $.expr)),
-      prec.left(12, seq($.expr, '-', $.expr)),
+      prec.left(12, seq(field('lhs', $.expr), '+', field('rhs', $.expr))),
+      prec.left(12, seq(field('lhs', $.expr), '-', field('rhs', $.expr))),
 
-      prec.left(11, seq($.expr, '..', $.expr)),
+      prec.left(11, seq(field('lhs', $.expr), '..', field('rhs', $.expr))),
 
-      prec.left(10, seq($.expr, '<<', $.expr)),
-      prec.left(10, seq($.expr, '>>', $.expr)),
+      prec.left(10, seq(field('lhs', $.expr), '<<', field('rhs', $.expr))),
+      prec.left(10, seq(field('lhs', $.expr), '>>', field('rhs', $.expr))),
 
-      prec.left(9, seq($.expr, '<=>', $.expr)),
+      prec.left(9, seq(field('lhs', $.expr), '<=>', field('rhs', $.expr))),
 
-      prec.left(8, seq($.expr, '<', $.expr)),
-      prec.left(8, seq($.expr, '<=', $.expr)),
-      prec.left(8, seq($.expr, '>', $.expr)),
-      prec.left(8, seq($.expr, '>=', $.expr)),
+      prec.left(8, seq(field('lhs', $.expr), '<', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), '<=', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), '>', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), '>=', field('rhs', $.expr))),
 
-      prec.left(7, seq($.expr, '==', $.expr)),
-      prec.left(7, seq($.expr, '!=', $.expr)),
+      prec.left(7, seq(field('lhs', $.expr), '==', field('rhs', $.expr))),
+      prec.left(7, seq(field('lhs', $.expr), '!=', field('rhs', $.expr))),
 
-      prec.left(6, seq($.expr, '&', $.expr)),
-      prec.left(5, seq($.expr, '^', $.expr)),
-      prec.left(4, seq($.expr, '|', $.expr)),
+      prec.left(6, seq(field('lhs', $.expr), '&', field('rhs', $.expr))),
+      prec.left(5, seq(field('lhs', $.expr), '^', field('rhs', $.expr))),
+      prec.left(4, seq(field('lhs', $.expr), '|', field('rhs', $.expr))),
 
-      prec.left(3, seq($.expr, '&&', $.expr)),
-      prec.left(2, seq($.expr, '||', $.expr)),
+      prec.left(3, seq(field('lhs', $.expr), '&&', field('rhs', $.expr))),
+      prec.left(2, seq(field('lhs', $.expr), '||', field('rhs', $.expr))),
 
-      prec.right(1, seq($.expr, '?', $.expr, ':', $.expr)),
+      prec.right(1, seq(field('cond', $.expr), '?', field('then', $.expr), ':', field('else', $.expr))),
 
-      prec.right(0, seq($.expr, $.assignment_operator, $.expr)),
+      prec.right(0, seq(field('lhs', $.expr), $.assignment_operator, field('rhs', $.expr))),
     ),
 
     prefix_operator: $ => choice('-', '~', '!', '&', '&&', 'try', 'must'),
@@ -301,11 +277,6 @@ module.exports = grammar({
     expr_list: $ => seq($.expr, repeat(seq(',', $.expr)), optional(',')),
 
     operand: $ => choice(
-      $.member_access_expr,
-
-      $.call_expr,
-      $.index_expr,
-
       $.name,
       'true',
       'false',
@@ -315,19 +286,30 @@ module.exports = grammar({
       $.hex_literal,
       $.char_literal,
       $.string_literal,
+
+      $.namespace_expr,
+
+      $.member_access_expr,
+
+      $.call_expr,
+      $.index_expr,
+
       $.named_tuple_expr,
       $.unnamed_tuple_expr,
       $.empty_tuple_expr,
       $.array_expr,
       $.dict_expr,
       $.match_expr,
+
       $.anonymous_function_expr,
-      $.function_reference_expr
+      $.function_reference_expr,
+      $.function_type
     ),
 
-    member_access_expr: $ => prec.left(19, seq($.operand, '.', $.operand)),
-    call_expr: $ => prec.left(18, seq($.operand, '(', optional($.expr_list), ')')),
-    index_expr: $ => prec.left(18, seq($.operand, '[', $.expr_list, ']')),
+    namespace_expr: $ => prec.left(20, seq(field('lhs', $.operand), '::', field('rhs', $.operand))),
+    member_access_expr: $ => prec.left(19, seq(field('lhs', $.operand), '.', field('rhs', $.operand))),
+    call_expr: $ => prec.left(18, seq(field('callee', $.operand), '(', optional($.expr_list), ')')),
+    index_expr: $ => prec.left(18, seq(field('object', $.operand), '[', $.expr_list, ']')),
 
     named_tuple_expr: $ => seq(
       '(',
@@ -367,6 +349,8 @@ module.exports = grammar({
 
     anonymous_function_expr: $ => seq('func', $.function_signature, $.compound_stmt),
     function_reference_expr: $ => seq('func', '&', $.name, '(', optional(seq($.type, repeat(seq(',', $.type)))), ')'),
+
+    function_type: $ => prec(2, seq($.unnamed_tuple_expr, '->', $.type)),
 
     identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
     operator_name: $ => choice(

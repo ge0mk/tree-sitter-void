@@ -115,17 +115,24 @@
   {
     "type": "call_expr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "callee": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operand",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "expr_list",
-          "named": true
-        },
-        {
-          "type": "operand",
           "named": true
         }
       ]
@@ -406,10 +413,65 @@
   {
     "type": "expr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "cond": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "else": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "lhs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "then": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expr",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "assignment_operator",
@@ -425,10 +487,6 @@
         },
         {
           "type": "prefix_operator",
-          "named": true
-        },
-        {
-          "type": "type",
           "named": true
         }
       ]
@@ -588,7 +646,7 @@
           "named": true
         },
         {
-          "type": "unnamed_tuple_type",
+          "type": "unnamed_tuple_expr",
           "named": true
         }
       ]
@@ -681,17 +739,24 @@
   {
     "type": "index_expr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "object": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operand",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "expr_list",
-          "named": true
-        },
-        {
-          "type": "operand",
           "named": true
         }
       ]
@@ -921,35 +986,31 @@
   {
     "type": "member_access_expr",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "operand",
-          "named": true
-        }
-      ]
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operand",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operand",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "name_segment",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "name_segment",
     "named": true,
     "fields": {},
     "children": {
@@ -991,22 +1052,29 @@
     }
   },
   {
-    "type": "named_tuple_type",
+    "type": "namespace_expr",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operand",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "operand",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1069,6 +1137,10 @@
           "named": true
         },
         {
+          "type": "function_type",
+          "named": true
+        },
+        {
           "type": "hex_literal",
           "named": true
         },
@@ -1090,6 +1162,10 @@
         },
         {
           "type": "named_tuple_expr",
+          "named": true
+        },
+        {
+          "type": "namespace_expr",
           "named": true
         },
         {
@@ -1350,23 +1426,7 @@
       "required": true,
       "types": [
         {
-          "type": "function_type",
-          "named": true
-        },
-        {
-          "type": "name",
-          "named": true
-        },
-        {
-          "type": "named_tuple_type",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        },
-        {
-          "type": "unnamed_tuple_type",
+          "type": "operand",
           "named": true
         }
       ]
@@ -1432,21 +1492,6 @@
       "types": [
         {
           "type": "expr_list",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "unnamed_tuple_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type",
           "named": true
         }
       ]

@@ -11,4 +11,4 @@
 (variant_case_decl (identifier) @local.definition)
 (match_case_decl (identifier) @local.definition)
 
-(operand (name (name_segment (identifier) @local.reference)))
+(operand (name (identifier) @local.reference))
