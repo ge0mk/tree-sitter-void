@@ -1549,49 +1549,6 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 17,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "expr"
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "++"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "--"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "PREC_RIGHT",
-          "value": 16,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "prefix_operator"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "expr"
-              }
-            ]
-          }
-        },
-        {
-          "type": "PREC_LEFT",
           "value": 15,
           "content": {
             "type": "SEQ",
@@ -2513,6 +2470,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "postfix_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "prefix_expr"
+        },
+        {
+          "type": "SYMBOL",
           "name": "named_tuple_expr"
         },
         {
@@ -2669,6 +2634,49 @@
           {
             "type": "STRING",
             "value": "]"
+          }
+        ]
+      }
+    },
+    "postfix_expr": {
+      "type": "PREC_LEFT",
+      "value": 17,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "operand"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "++"
+              },
+              {
+                "type": "STRING",
+                "value": "--"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "prefix_expr": {
+      "type": "PREC_RIGHT",
+      "value": 16,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "prefix_operator"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "operand"
           }
         ]
       }

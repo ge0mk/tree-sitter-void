@@ -228,10 +228,6 @@ module.exports = grammar({
     expr: $ => choice(
       $.operand,
 
-      prec.left(17, seq($.expr, choice('++', '--'))),
-
-      prec.right(16, seq($.prefix_operator, $.expr)),
-
       prec.left(15, seq(field('lhs', $.expr), 'is', field('rhs', $.type))),
       prec.left(15, seq(field('lhs', $.expr), 'as', field('rhs', $.type))),
 
@@ -293,6 +289,8 @@ module.exports = grammar({
 
       $.call_expr,
       $.index_expr,
+      $.postfix_expr,
+      $.prefix_expr,
 
       $.named_tuple_expr,
       $.unnamed_tuple_expr,
@@ -310,6 +308,9 @@ module.exports = grammar({
     member_access_expr: $ => prec.left(19, seq(field('lhs', $.operand), '.', field('rhs', $.operand))),
     call_expr: $ => prec.left(18, seq(field('callee', $.operand), '(', optional($.expr_list), ')')),
     index_expr: $ => prec.left(18, seq(field('object', $.operand), '[', $.expr_list, ']')),
+
+    postfix_expr: $ => prec.left(17, seq($.operand, choice('++', '--'))),
+    prefix_expr: $ => prec.right(16, seq($.prefix_operator, $.operand)),
 
     named_tuple_expr: $ => seq(
       '(',

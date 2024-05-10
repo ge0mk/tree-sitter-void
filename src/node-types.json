@@ -470,7 +470,7 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -478,15 +478,7 @@
           "named": true
         },
         {
-          "type": "expr",
-          "named": true
-        },
-        {
           "type": "operand",
-          "named": true
-        },
-        {
-          "type": "prefix_operator",
           "named": true
         }
       ]
@@ -1173,6 +1165,14 @@
           "named": true
         },
         {
+          "type": "postfix_expr",
+          "named": true
+        },
+        {
+          "type": "prefix_expr",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         },
@@ -1216,6 +1216,21 @@
     }
   },
   {
+    "type": "postfix_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "operand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pragma",
     "named": true,
     "fields": {},
@@ -1225,6 +1240,25 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "prefix_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "operand",
+          "named": true
+        },
+        {
+          "type": "prefix_operator",
           "named": true
         }
       ]
