@@ -13,7 +13,9 @@ module.exports = grammar({
     $.expr,
     $.expr_list,
     $.operand,
-    $.operand_or_type
+    $.operand_or_type,
+    $.prefix_operator,
+    $.assignment_operator,
   ],
 
   word: $ => $.identifier,
@@ -58,43 +60,47 @@ module.exports = grammar({
 
     if_stmt: $ => prec.left(seq(
       optional('comptime'),
-      'if', $.expr,
-      $.compound_stmt,
+      'if', field('cond', $.expr),
+      field('then', $.compound_stmt),
       optional(seq(
         'else',
-        choice($.if_stmt, $.if_var_stmt, $.compound_stmt)
+        field('else', choice($.if_stmt, $.if_var_stmt, $.compound_stmt))
       ))
     )),
 
     if_var_stmt: $ => seq(
-      'if', choice('const', 'var'), $.identifier,
-      optional(seq(':', $.type)),
-      '=', $.expr,
-      $.compound_stmt
+      'if', choice('const', 'var'), field('name', $.identifier),
+      optional(seq(':', field('type', $.type))),
+      '=', field('initializer', $.expr),
+      field('body', $.compound_stmt),
+      optional(seq(
+        'else',
+        field('else', choice($.if_stmt, $.if_var_stmt, $.compound_stmt))
+      ))
     ),
 
     var_else_stmt: $ => prec(1, seq(
-      choice('const', 'var'), $.identifier,
-      optional(seq(':', $.type)),
-      '=', $.expr,
+      choice('const', 'var'), field('name', $.identifier),
+      optional(seq(':', field('type', $.type))),
+      '=', field('initializer', $.expr),
       'else',
-      optional(seq(':', optional(choice('&', '&&')), $.identifier)),
-      $.compound_stmt
+      optional(seq(':', optional(choice('&', '&&')), field('capture', $.identifier))),
+      field('body', $.compound_stmt)
     )),
 
     while_stmt: $ => seq(
       optional('comptime'),
       'while',
-      $.expr,
-      $.compound_stmt
+      field('cond', $.expr),
+      field('body', $.compound_stmt)
     ),
 
     do_while_stmt: $ => seq(
       optional('comptime'),
       'do',
-      $.compound_stmt,
+      field('body', $.compound_stmt),
       'while',
-      $.expr,
+      field('cond', $.expr),
       optional(';')
     ),
 
@@ -102,10 +108,10 @@ module.exports = grammar({
       optional('comptime'),
       'for',
       optional(choice('&', '&&')),
-      $.identifier,
+      field('capture', $.identifier),
       'in',
-      $.expr,
-      $.compound_stmt
+      field('range', $.expr),
+      field('body', $.compound_stmt)
     ),
 
     break_stmt: $ => seq('break', optional(';')),
@@ -121,11 +127,11 @@ module.exports = grammar({
       optional('private'),
       optional('comptime'),
       choice('const', 'var'),
-      $.identifier,
+      field('name', $.identifier),
       choice(
-        seq(':', $.type, '=', $.expr),
-        seq(':', $.type),
-        seq('=', $.expr)
+        seq(':', field('type', $.type), '=', field('initializer', $.expr)),
+        seq(':', field('type', $.type)),
+        seq('=', field('initializer', $.expr))
       ),
       optional(';')
     ),
@@ -136,10 +142,17 @@ module.exports = grammar({
       optional('private'),
       optional('comptime'),
       'func',
-      choice($.identifier, $.operator_name),
-      $.function_signature,
-      $.function_body,
+      field('name', choice($.identifier, $.operator_name)),
+      field('signature', $.function_signature),
+      field('body', choice(
+        $.default_function_body,
+        $.extern_function_body,
+        $.compound_stmt
+      ))
     ),
+
+    default_function_body: $ => seq('=', 'default', optional(';')),
+    extern_function_body: $ => seq('=', 'extern', optional(';')),
 
     function_signature: $ => seq(
       '(',
@@ -149,20 +162,14 @@ module.exports = grammar({
       )),
       ')',
       '->',
-      $.type
+      field('return_type', $.type)
     ),
 
     parameter_decl: $ => seq(
       optional($.annotations),
-      $.identifier,
-      seq(':', $.type),
-      optional(seq('=', $.expr))
-    ),
-
-    function_body: $ => choice(
-      seq('=', 'default', optional(';')),
-      seq('=', 'extern', optional(';')),
-      $.compound_stmt
+      field('name', $.identifier),
+      seq(':', field('type', $.type)),
+      optional(seq('=', field('initializer', $.expr)))
     ),
 
     type_decl: $ => seq(
@@ -170,18 +177,24 @@ module.exports = grammar({
       optional($.template_parameter_decl),
       optional('private'),
       choice('struct', 'enum', 'variant', 'namespace'),
-      $.identifier,
-      optional(seq(':', $.type)),
-      $.compound_stmt
+      field('name', $.identifier),
+      optional(seq(':', field('base_type', $.type))),
+      field('body', $.compound_stmt)
     ),
 
-    type_alias: $ => seq('alias', $.identifier, '=', $.type, optional(';')),
+    type_alias: $ => seq(
+      'alias',
+      field('name', $.identifier),
+      '=',
+      field('type', $.type),
+      optional(';')
+    ),
 
     variant_case_decl: $ => seq(
       'case',
-      $.identifier,
-      optional(seq(':', $.type)),
-      optional(seq('=', $.expr)),
+      field('name', $.identifier),
+      optional(seq(':', field('type', $.type))),
+      optional(seq('=', field('id', $.expr))),
       optional(';')
     ),
 
@@ -193,15 +206,15 @@ module.exports = grammar({
     ),
 
     annotation: $ => seq(
-      $.identifier,
-      optional(seq(':', choice(
+      field('key', $.identifier),
+      optional(seq(':', field('value', choice(
         $.bin_literal,
         $.oct_literal,
         $.dec_literal,
         $.hex_literal,
         $.char_literal,
         $.string_literal,
-      )))
+      ))))
     ),
 
     template_parameter_decl: $ => seq(
@@ -223,8 +236,8 @@ module.exports = grammar({
 
     name: $ => prec.right(20, seq(
       choice(
-        $.identifier,
-        seq('operator', $.operator_name)
+        field('name', $.identifier),
+        seq('operator', field('name', $.operator_name))
       ),
       optional(seq('!', '<', $.operand_or_type, repeat(seq(',', $.operand_or_type)), '>')),
     )),
@@ -277,89 +290,98 @@ module.exports = grammar({
     call_expr: $ => prec.left(18, seq(field('callee', $.operand), '(', optional($.expr_list), ')')),
     index_expr: $ => prec.left(18, seq(field('object', $.operand), '[', $.expr_list, ']')),
 
-    postfix_expr: $ => prec.left(17, seq($.operand, choice('++', '--'))),
-    prefix_expr: $ => prec.right(16, seq($.prefix_operator, $.operand)),
+    postfix_expr: $ => prec.left(17, seq(field('operand', $.operand), field('op', choice('++', '--')))),
+    prefix_expr: $ => prec.right(16, seq(field('op', $.prefix_operator), field('operand', $.operand))),
 
     binary_expr: $ => choice(
-      prec.left(15, seq(field('lhs', $.expr), 'is', field('rhs', $.type))),
-      prec.left(15, seq(field('lhs', $.expr), 'as', field('rhs', $.type))),
+      prec.left(15, seq(field('lhs', $.expr), field('op', 'is'), field('rhs', $.type))),
+      prec.left(15, seq(field('lhs', $.expr), field('op', 'as'), field('rhs', $.type))),
 
-      prec.left(14, seq(field('lhs', $.expr), '??', field('rhs', $.expr))),
+      prec.left(14, seq(field('lhs', $.expr), field('op', '??'), field('rhs', $.expr))),
 
-      prec.left(13, seq(field('lhs', $.expr), '*', field('rhs', $.expr))),
-      prec.left(13, seq(field('lhs', $.expr), '/', field('rhs', $.expr))),
-      prec.left(13, seq(field('lhs', $.expr), '%', field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), field('op', '*'), field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), field('op', '/'), field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), field('op', '%'), field('rhs', $.expr))),
 
-      prec.left(12, seq(field('lhs', $.expr), '+', field('rhs', $.expr))),
-      prec.left(12, seq(field('lhs', $.expr), '-', field('rhs', $.expr))),
+      prec.left(12, seq(field('lhs', $.expr), field('op', '+'), field('rhs', $.expr))),
+      prec.left(12, seq(field('lhs', $.expr), field('op', '-'), field('rhs', $.expr))),
 
-      prec.left(11, seq(field('lhs', $.expr), '..', field('rhs', $.expr))),
+      prec.left(11, seq(field('lhs', $.expr), field('op', '..'), field('rhs', $.expr))),
 
-      prec.left(10, seq(field('lhs', $.expr), '<<', field('rhs', $.expr))),
-      prec.left(10, seq(field('lhs', $.expr), '>>', field('rhs', $.expr))),
+      prec.left(10, seq(field('lhs', $.expr), field('op', '<<'), field('rhs', $.expr))),
+      prec.left(10, seq(field('lhs', $.expr), field('op', '>>'), field('rhs', $.expr))),
 
-      prec.left(9, seq(field('lhs', $.expr), '<=>', field('rhs', $.expr))),
+      prec.left(9, seq(field('lhs', $.expr), field('op', '<=>'), field('rhs', $.expr))),
 
-      prec.left(8, seq(field('lhs', $.expr), '<', field('rhs', $.expr))),
-      prec.left(8, seq(field('lhs', $.expr), '<=', field('rhs', $.expr))),
-      prec.left(8, seq(field('lhs', $.expr), '>', field('rhs', $.expr))),
-      prec.left(8, seq(field('lhs', $.expr), '>=', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), field('op', '<'), field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), field('op', '<='), field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), field('op', '>'), field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), field('op', '>='), field('rhs', $.expr))),
 
-      prec.left(7, seq(field('lhs', $.expr), '==', field('rhs', $.expr))),
-      prec.left(7, seq(field('lhs', $.expr), '!=', field('rhs', $.expr))),
+      prec.left(7, seq(field('lhs', $.expr), field('op', '=='), field('rhs', $.expr))),
+      prec.left(7, seq(field('lhs', $.expr), field('op', '!='), field('rhs', $.expr))),
 
-      prec.left(6, seq(field('lhs', $.expr), '&', field('rhs', $.expr))),
-      prec.left(5, seq(field('lhs', $.expr), '^', field('rhs', $.expr))),
-      prec.left(4, seq(field('lhs', $.expr), '|', field('rhs', $.expr))),
+      prec.left(6, seq(field('lhs', $.expr), field('op', '&'), field('rhs', $.expr))),
+      prec.left(5, seq(field('lhs', $.expr), field('op', '^'), field('rhs', $.expr))),
+      prec.left(4, seq(field('lhs', $.expr), field('op', '|'), field('rhs', $.expr))),
 
-      prec.left(3, seq(field('lhs', $.expr), '&&', field('rhs', $.expr))),
-      prec.left(2, seq(field('lhs', $.expr), '||', field('rhs', $.expr))),
+      prec.left(3, seq(field('lhs', $.expr), field('op', '&&'), field('rhs', $.expr))),
+      prec.left(2, seq(field('lhs', $.expr), field('op', '||'), field('rhs', $.expr))),
 
-      prec.right(0, seq(field('lhs', $.expr), $.assignment_operator, field('rhs', $.expr))),
+      prec.right(0, seq(field('lhs', $.expr), field('op', $.assignment_operator), field('rhs', $.expr))),
     ),
 
     inline_if_expr: $ => prec.right(1, seq(field('cond', $.expr), '?', field('then', $.expr), ':', field('else', $.expr))),
 
     named_tuple_expr: $ => seq(
       '(',
-      $.identifier, ':', $.expr,
-      repeat(seq(',', $.identifier, ':', $.expr)),
+      $.named_tuple_element,
+      repeat(seq(',', $.named_tuple_element)),
       ')'
     ),
+    named_tuple_element: $ => seq(
+      field('key', $.identifier), ':', field('value', $.expr),
+    ),
+
     unnamed_tuple_expr: $ => seq('(', $.expr_list, ')'),
     empty_tuple_expr: $ => seq('(', ')'),
 
-    array_expr: $ => seq(
-      '[',
-      $.expr,
-      repeat(seq(',', $.expr)),
-      ']'
-    ),
+    array_expr: $ => seq('[', optional($.expr_list), ']'),
 
     dict_expr: $ => seq(
       '{',
-      $.expr, ':', $.expr,
-      repeat(seq(',', $.expr, ':', $.expr)),
+      $.dict_element,
+      repeat(seq(',', $.dict_element)),
       '}'
     ),
+    dict_element: $ => seq(
+      field('key', $.expr), ':', field('value', $.expr),
+    ),
 
-    match_expr: $ => seq('match', $.expr, '{', repeat($.match_case_decl), optional($.match_default_case), '}'),
+    match_expr: $ => seq(
+      'match',
+      field('value', $.expr),
+      '{',
+      repeat($.match_case_decl),
+      optional($.match_default_case),
+      '}'
+    ),
 
     match_case_decl: $ => seq(
       'case',
       $.operand,
       repeat(seq('|', $.operand)),
-      optional(seq(':', optional(choice('&', '&&')), $.identifier)),
+      optional(seq(':', optional(choice('&', '&&')), field('capture', $.identifier))),
       '->',
-      $.stmt
+      field('body', $.stmt)
     ),
 
-    match_default_case: $ => seq('default', '->', $.stmt),
+    match_default_case: $ => seq('default', '->', field('body', $.stmt)),
 
-    anonymous_function_expr: $ => seq('func', $.function_signature, $.compound_stmt),
-    function_reference_expr: $ => seq('func', '&', $.name, '(', optional(seq($.type, repeat(seq(',', $.type)))), ')'),
+    anonymous_function_expr: $ => seq('func', field('signature', $.function_signature), field('body', $.compound_stmt)),
+    function_reference_expr: $ => seq('func', '&', field('name', $.name), '(', optional(seq($.type, repeat(seq(',', $.type)))), ')'),
 
-    function_type: $ => prec(2, seq($.unnamed_tuple_expr, '->', $.type)),
+    function_type: $ => prec(2, seq($.unnamed_tuple_expr, '->', field('return_type', $.type))),
 
     identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
     operator_name: $ => choice(
@@ -372,10 +394,10 @@ module.exports = grammar({
     assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
 
     bool_literal: $ => choice('true', 'false'),
-    bin_literal: $ => prec.right(30, seq(/0b[01]+/, optional($.identifier))),
-    oct_literal: $ => prec.right(30, seq(/0o[01234567]+/, optional($.identifier))),
-    dec_literal: $ => prec.right(30, seq(/\d+(\.\d+)?([eE][+-]?\d+)?/, optional($.identifier))),
-    hex_literal: $ => prec.right(30, seq(/0x(([0-9a-f]+)|([0-9A-F]+))/, optional($.identifier))),
+    bin_literal: $ => prec.right(30, seq(/0b[01]+/, optional(field('suffix', $.identifier)))),
+    oct_literal: $ => prec.right(30, seq(/0o[01234567]+/, optional(field('suffix', $.identifier)))),
+    dec_literal: $ => prec.right(30, seq(/\d+(\.\d+)?([eE][+-]?\d+)?/, optional(field('suffix', $.identifier)))),
+    hex_literal: $ => prec.right(30, seq(/0x(([0-9a-f]+)|([0-9A-F]+))/, optional(field('suffix', $.identifier)))),
 
     char_literal: $ => prec.right(30, seq(
       '\'',
@@ -384,7 +406,7 @@ module.exports = grammar({
         $.escape_sequence,
       )),
       '\'',
-      optional($.identifier)
+      optional(field('suffix', $.identifier))
     )),
 
     string_literal: $ => prec.right(30, seq(
@@ -394,7 +416,7 @@ module.exports = grammar({
         $.escape_sequence,
       )),
       '\"',
-      optional($.identifier)
+      optional(field('suffix', $.identifier))
     )),
 
     escape_sequence: $ => token(prec(1, seq(

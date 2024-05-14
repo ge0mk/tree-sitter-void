@@ -67,7 +67,7 @@
 (type (name (identifier) @type))
 (type (prefix_expr (name (identifier) @type)))
 (name (name (identifier) @type))
-(named_tuple_expr (identifier) @property)
+(named_tuple_element (identifier) @property)
 
 (parameter_decl (identifier) @variable.parameter)
 (var_decl (identifier) @variable)
