@@ -12,10 +12,8 @@ func foo() -> int {}
     (function_signature
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body
-      (compound_stmt))))
+          (identifier))))
+    (compound_stmt)))
 
 ==================
 template parameters
@@ -36,10 +34,8 @@ func foo() -> T {}
     (function_signature
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body
-      (compound_stmt))))
+          (identifier))))
+    (compound_stmt)))
 
 ==================
 annotations
@@ -55,16 +51,13 @@ func foo() -> int {}
     (annotations
       (annotation
         (identifier)
-        (string_literal
-          (string_content))))
+        (string_literal)))
     (identifier)
     (function_signature
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body
-      (compound_stmt))))
+          (identifier))))
+    (compound_stmt)))
 
 ==================
 default body
@@ -80,9 +73,8 @@ func foo() -> int = default
     (function_signature
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body)))
+          (identifier))))
+    (default_function_body)))
 
 ==================
 extern body
@@ -98,9 +90,8 @@ func foo() -> int = extern
     (function_signature
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body)))
+          (identifier))))
+    (extern_function_body)))
 
 ==================
 parameters
@@ -118,20 +109,16 @@ func foo(x: uint, y: int) -> int {}
         (identifier)
         (type
           (name
-            (name_segment
-              (identifier)))))
+            (identifier))))
       (parameter_decl
         (identifier)
         (type
           (name
-            (name_segment
-              (identifier)))))
+            (identifier))))
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body
-      (compound_stmt))))
+          (identifier))))
+    (compound_stmt)))
 
 ==================
 operator
@@ -147,7 +134,5 @@ func +() -> int {}
     (function_signature
       (type
         (name
-          (name_segment
-            (identifier)))))
-    (function_body
-      (compound_stmt))))
+          (identifier))))
+    (compound_stmt)))

@@ -8,10 +8,8 @@ prefix operator
 
 (source_file
   (expr_stmt
-    (expr
-      (prefix_operator)
-      (expr
-        (operand)))))
+    (prefix_expr
+      (bool_literal))))
 
 ==================
 postfix operator
@@ -23,12 +21,9 @@ foo++
 
 (source_file
   (expr_stmt
-    (expr
-      (expr
-        (operand
-          (name
-            (name_segment
-              (identifier))))))))
+    (postfix_expr
+      (name
+        (identifier)))))
 
 ==================
 binary operator
@@ -40,13 +35,9 @@ binary operator
 
 (source_file
   (expr_stmt
-    (expr
-      (expr
-        (operand
-          (dec_literal)))
-      (expr
-        (operand
-          (dec_literal))))))
+    (binary_expr
+      (dec_literal)
+      (dec_literal))))
 
 
 ==================
@@ -59,16 +50,9 @@ foo.operator +()
 
 (source_file
   (expr_stmt
-    (expr
-      (operand
-        (call_expr
-          (operand
-            (member_access_expr
-              (operand
-                (name
-                  (name_segment
-                    (identifier))))
-          (operand
-            (name
-              (name_segment
-                (operator_name)))))))))))
+    (call_expr
+      (member_access_expr
+        (name
+            (identifier))
+        (name
+          (operator_name))))))

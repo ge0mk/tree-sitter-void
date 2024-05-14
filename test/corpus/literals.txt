@@ -16,41 +16,23 @@ false
 
 (source_file
   (expr_stmt
-    (expr
-      (operand
-        (dec_literal))))
+    (dec_literal))
   (expr_stmt
-    (expr
-      (operand
-        (bin_literal))))
+    (bin_literal))
   (expr_stmt
-    (expr
-      (operand
-        (oct_literal))))
+    (oct_literal))
   (expr_stmt
-    (expr
-      (operand
-        (hex_literal))))
+    (hex_literal))
   (expr_stmt
-    (expr
-      (operand
-        (dec_literal))))
+    (dec_literal))
   (expr_stmt
-    (expr
-      (operand
-        (string_literal
-          (string_content)))))
+    (string_literal))
   (expr_stmt
-    (expr
-      (operand
-        (char_literal
-          (character)))))
+    (char_literal))
   (expr_stmt
-    (expr
-      (operand)))
+    (bool_literal))
   (expr_stmt
-    (expr
-      (operand))))
+    (bool_literal)))
 
 ==================
 with suffix
@@ -63,19 +45,11 @@ with suffix
 ---
 (source_file
   (expr_stmt
-    (expr
-      (operand
-        (dec_literal
-          (identifier)))))
+    (dec_literal
+      (identifier)))
   (expr_stmt
-    (expr
-      (operand
-        (string_literal
-          (string_content)
-          (identifier)))))
+    (string_literal
+      (identifier)))
   (expr_stmt
-    (expr
-      (operand
-        (char_literal
-          (character)
-          (identifier))))))
+    (char_literal
+      (identifier))))

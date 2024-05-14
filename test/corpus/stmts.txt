@@ -8,8 +8,7 @@ if true {}
 
 (source_file
   (if_stmt
-    (expr
-      (operand))
+    (bool_literal)
     (compound_stmt)))
 
 ==================
@@ -24,8 +23,7 @@ if true {
 
 (source_file
   (if_stmt
-    (expr
-      (operand))
+    (bool_literal)
     (compound_stmt)
     (compound_stmt)))
 
@@ -41,12 +39,10 @@ if true {
 
 (source_file
   (if_stmt
-    (expr
-      (operand))
+    (bool_literal)
     (compound_stmt)
     (if_stmt
-      (expr
-        (operand))
+      (bool_literal)
       (compound_stmt))))
 
 ==================
@@ -59,8 +55,7 @@ while true {}
 
 (source_file
   (while_stmt
-    (expr
-      (operand))
+    (bool_literal)
     (compound_stmt)))
 
 ==================
@@ -74,5 +69,4 @@ do {} while true
 (source_file
   (do_while_stmt
     (compound_stmt)
-    (expr
-      (operand))))
+    (bool_literal)))
