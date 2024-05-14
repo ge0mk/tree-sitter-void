@@ -1449,7 +1449,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "operand"
+                  "name": "operand_or_type"
                 }
               ]
             },
@@ -1462,7 +1462,7 @@
     },
     "type": {
       "type": "SYMBOL",
-      "name": "operand"
+      "name": "operand_or_type"
     },
     "name": {
       "type": "PREC_RIGHT",
@@ -1508,7 +1508,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "operand"
+                    "name": "operand_or_type"
                   },
                   {
                     "type": "REPEAT",
@@ -1521,7 +1521,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "operand"
+                          "name": "operand_or_type"
                         }
                       ]
                     }
@@ -1684,6 +1684,15 @@
         {
           "type": "SYMBOL",
           "name": "function_reference_expr"
+        }
+      ]
+    },
+    "operand_or_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "operand"
         },
         {
           "type": "SYMBOL",
@@ -3534,7 +3543,8 @@
     "stmt",
     "expr",
     "expr_list",
-    "operand"
+    "operand",
+    "operand_or_type"
   ],
   "supertypes": []
 }

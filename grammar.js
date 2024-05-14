@@ -12,7 +12,8 @@ module.exports = grammar({
     $.stmt,
     $.expr,
     $.expr_list,
-    $.operand
+    $.operand,
+    $.operand_or_type
   ],
 
   word: $ => $.identifier,
@@ -215,17 +216,17 @@ module.exports = grammar({
       $.identifier,
       ':',
       $.identifier,
-      optional(seq('=', $.operand))
+      optional(seq('=', $.operand_or_type))
     ),
 
-    type: $ => $.operand,
+    type: $ => $.operand_or_type,
 
     name: $ => prec.right(20, seq(
       choice(
         $.identifier,
         seq('operator', $.operator_name)
       ),
-      optional(seq('!', '<', $.operand, repeat(seq(',', $.operand)), '>')),
+      optional(seq('!', '<', $.operand_or_type, repeat(seq(',', $.operand_or_type)), '>')),
     )),
 
     expr: $ => choice(
@@ -264,6 +265,10 @@ module.exports = grammar({
 
       $.anonymous_function_expr,
       $.function_reference_expr,
+    ),
+
+    operand_or_type: $ => choice(
+      $.operand,
       $.function_type
     ),
 
