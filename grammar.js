@@ -9,7 +9,10 @@ module.exports = grammar({
   ],
 
   inline: $ => [
-    $.stmt
+    $.stmt,
+    $.expr,
+    $.expr_list,
+    $.operand
   ],
 
   word: $ => $.identifier,
@@ -227,55 +230,15 @@ module.exports = grammar({
 
     expr: $ => choice(
       $.operand,
-
-      prec.left(15, seq(field('lhs', $.expr), 'is', field('rhs', $.type))),
-      prec.left(15, seq(field('lhs', $.expr), 'as', field('rhs', $.type))),
-
-      prec.left(14, seq(field('lhs', $.expr), '??', field('rhs', $.expr))),
-
-      prec.left(13, seq(field('lhs', $.expr), '*', field('rhs', $.expr))),
-      prec.left(13, seq(field('lhs', $.expr), '/', field('rhs', $.expr))),
-      prec.left(13, seq(field('lhs', $.expr), '%', field('rhs', $.expr))),
-
-      prec.left(12, seq(field('lhs', $.expr), '+', field('rhs', $.expr))),
-      prec.left(12, seq(field('lhs', $.expr), '-', field('rhs', $.expr))),
-
-      prec.left(11, seq(field('lhs', $.expr), '..', field('rhs', $.expr))),
-
-      prec.left(10, seq(field('lhs', $.expr), '<<', field('rhs', $.expr))),
-      prec.left(10, seq(field('lhs', $.expr), '>>', field('rhs', $.expr))),
-
-      prec.left(9, seq(field('lhs', $.expr), '<=>', field('rhs', $.expr))),
-
-      prec.left(8, seq(field('lhs', $.expr), '<', field('rhs', $.expr))),
-      prec.left(8, seq(field('lhs', $.expr), '<=', field('rhs', $.expr))),
-      prec.left(8, seq(field('lhs', $.expr), '>', field('rhs', $.expr))),
-      prec.left(8, seq(field('lhs', $.expr), '>=', field('rhs', $.expr))),
-
-      prec.left(7, seq(field('lhs', $.expr), '==', field('rhs', $.expr))),
-      prec.left(7, seq(field('lhs', $.expr), '!=', field('rhs', $.expr))),
-
-      prec.left(6, seq(field('lhs', $.expr), '&', field('rhs', $.expr))),
-      prec.left(5, seq(field('lhs', $.expr), '^', field('rhs', $.expr))),
-      prec.left(4, seq(field('lhs', $.expr), '|', field('rhs', $.expr))),
-
-      prec.left(3, seq(field('lhs', $.expr), '&&', field('rhs', $.expr))),
-      prec.left(2, seq(field('lhs', $.expr), '||', field('rhs', $.expr))),
-
-      prec.right(1, seq(field('cond', $.expr), '?', field('then', $.expr), ':', field('else', $.expr))),
-
-      prec.right(0, seq(field('lhs', $.expr), $.assignment_operator, field('rhs', $.expr))),
+      $.binary_expr,
+      $.inline_if_expr,
     ),
-
-    prefix_operator: $ => choice('-', '~', '!', '&', '&&', 'try', 'must'),
-    assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
 
     expr_list: $ => seq($.expr, repeat(seq(',', $.expr)), optional(',')),
 
     operand: $ => choice(
       $.name,
-      'true',
-      'false',
+      $.bool_literal,
       $.bin_literal,
       $.oct_literal,
       $.dec_literal,
@@ -311,6 +274,46 @@ module.exports = grammar({
 
     postfix_expr: $ => prec.left(17, seq($.operand, choice('++', '--'))),
     prefix_expr: $ => prec.right(16, seq($.prefix_operator, $.operand)),
+
+    binary_expr: $ => choice(
+      prec.left(15, seq(field('lhs', $.expr), 'is', field('rhs', $.type))),
+      prec.left(15, seq(field('lhs', $.expr), 'as', field('rhs', $.type))),
+
+      prec.left(14, seq(field('lhs', $.expr), '??', field('rhs', $.expr))),
+
+      prec.left(13, seq(field('lhs', $.expr), '*', field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), '/', field('rhs', $.expr))),
+      prec.left(13, seq(field('lhs', $.expr), '%', field('rhs', $.expr))),
+
+      prec.left(12, seq(field('lhs', $.expr), '+', field('rhs', $.expr))),
+      prec.left(12, seq(field('lhs', $.expr), '-', field('rhs', $.expr))),
+
+      prec.left(11, seq(field('lhs', $.expr), '..', field('rhs', $.expr))),
+
+      prec.left(10, seq(field('lhs', $.expr), '<<', field('rhs', $.expr))),
+      prec.left(10, seq(field('lhs', $.expr), '>>', field('rhs', $.expr))),
+
+      prec.left(9, seq(field('lhs', $.expr), '<=>', field('rhs', $.expr))),
+
+      prec.left(8, seq(field('lhs', $.expr), '<', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), '<=', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), '>', field('rhs', $.expr))),
+      prec.left(8, seq(field('lhs', $.expr), '>=', field('rhs', $.expr))),
+
+      prec.left(7, seq(field('lhs', $.expr), '==', field('rhs', $.expr))),
+      prec.left(7, seq(field('lhs', $.expr), '!=', field('rhs', $.expr))),
+
+      prec.left(6, seq(field('lhs', $.expr), '&', field('rhs', $.expr))),
+      prec.left(5, seq(field('lhs', $.expr), '^', field('rhs', $.expr))),
+      prec.left(4, seq(field('lhs', $.expr), '|', field('rhs', $.expr))),
+
+      prec.left(3, seq(field('lhs', $.expr), '&&', field('rhs', $.expr))),
+      prec.left(2, seq(field('lhs', $.expr), '||', field('rhs', $.expr))),
+
+      prec.right(0, seq(field('lhs', $.expr), $.assignment_operator, field('rhs', $.expr))),
+    ),
+
+    inline_if_expr: $ => prec.right(1, seq(field('cond', $.expr), '?', field('then', $.expr), ':', field('else', $.expr))),
 
     named_tuple_expr: $ => seq(
       '(',
@@ -360,6 +363,10 @@ module.exports = grammar({
       '<', '<=', '>', '>=', '==', '!=', '<=>'
     ),
 
+    prefix_operator: $ => choice('-', '~', '!', '&', '&&', 'try', 'must'),
+    assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
+
+    bool_literal: $ => choice('true', 'false'),
     bin_literal: $ => prec.right(30, seq(/0b[01]+/, optional($.identifier))),
     oct_literal: $ => prec.right(30, seq(/0o[01234567]+/, optional($.identifier))),
     dec_literal: $ => prec.right(30, seq(/\d+(\.\d+)?([eE][+-]?\d+)?/, optional($.identifier))),
@@ -368,7 +375,7 @@ module.exports = grammar({
     char_literal: $ => prec.right(30, seq(
       '\'',
       repeat1(choice(
-        alias(token.immediate(/[^\n']/), $.character),
+        token.immediate(/[^\n']/),
         $.escape_sequence,
       )),
       '\'',
@@ -378,7 +385,7 @@ module.exports = grammar({
     string_literal: $ => prec.right(30, seq(
       '\"',
       repeat(choice(
-        alias(token.immediate(prec(1, /[^\\"\n]+/)), $.string_content),
+        token.immediate(prec(1, /[^\\"\n]+/)),
         $.escape_sequence,
       )),
       '\"',
