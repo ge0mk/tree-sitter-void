@@ -182,8 +182,12 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "STRING",
-                "value": "comptime"
+                "type": "FIELD",
+                "name": "comptime",
+                "content": {
+                  "type": "STRING",
+                  "value": "comptime"
+                }
               },
               {
                 "type": "BLANK"
@@ -446,17 +450,21 @@
                     "type": "CHOICE",
                     "members": [
                       {
-                        "type": "CHOICE",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": "&"
-                          },
-                          {
-                            "type": "STRING",
-                            "value": "&&"
-                          }
-                        ]
+                        "type": "FIELD",
+                        "name": "capture_kind",
+                        "content": {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "STRING",
+                              "value": "&"
+                            },
+                            {
+                              "type": "STRING",
+                              "value": "&&"
+                            }
+                          ]
+                        }
                       },
                       {
                         "type": "BLANK"
@@ -496,8 +504,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "comptime"
+              "type": "FIELD",
+              "name": "comptime",
+              "content": {
+                "type": "STRING",
+                "value": "comptime"
+              }
             },
             {
               "type": "BLANK"
@@ -533,8 +545,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "comptime"
+              "type": "FIELD",
+              "name": "comptime",
+              "content": {
+                "type": "STRING",
+                "value": "comptime"
+              }
             },
             {
               "type": "BLANK"
@@ -586,8 +602,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "comptime"
+              "type": "FIELD",
+              "name": "comptime",
+              "content": {
+                "type": "STRING",
+                "value": "comptime"
+              }
             },
             {
               "type": "BLANK"
@@ -602,17 +622,21 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "&"
-                },
-                {
-                  "type": "STRING",
-                  "value": "&&"
-                }
-              ]
+              "type": "FIELD",
+              "name": "capture_kind",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "&"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "&&"
+                  }
+                ]
+              }
             },
             {
               "type": "BLANK"
@@ -798,8 +822,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "comptime"
+              "type": "FIELD",
+              "name": "comptime",
+              "content": {
+                "type": "STRING",
+                "value": "comptime"
+              }
             },
             {
               "type": "BLANK"
@@ -810,8 +838,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "discard"
+              "type": "FIELD",
+              "name": "discard",
+              "content": {
+                "type": "STRING",
+                "value": "discard"
+              }
             },
             {
               "type": "BLANK"
@@ -819,8 +851,12 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "expr"
+          "type": "FIELD",
+          "name": "expr",
+          "content": {
+            "type": "SYMBOL",
+            "name": "expr"
+          }
         },
         {
           "type": "CHOICE",
@@ -1120,8 +1156,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "comptime"
+              "type": "FIELD",
+              "name": "comptime",
+              "content": {
+                "type": "STRING",
+                "value": "comptime"
+              }
             },
             {
               "type": "BLANK"
@@ -3734,7 +3774,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "suffix",
+                "name": "postfix",
                 "content": {
                   "type": "SYMBOL",
                   "name": "identifier"
@@ -3767,7 +3807,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "suffix",
+                "name": "postfix",
                 "content": {
                   "type": "SYMBOL",
                   "name": "identifier"
@@ -3800,7 +3840,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "suffix",
+                "name": "postfix",
                 "content": {
                   "type": "SYMBOL",
                   "name": "identifier"
@@ -3833,7 +3873,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "suffix",
+                "name": "postfix",
                 "content": {
                   "type": "SYMBOL",
                   "name": "identifier"
@@ -3889,7 +3929,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "suffix",
+                "name": "postfix",
                 "content": {
                   "type": "SYMBOL",
                   "name": "identifier"
@@ -3949,7 +3989,7 @@
             "members": [
               {
                 "type": "FIELD",
-                "name": "suffix",
+                "name": "postfix",
                 "content": {
                   "type": "SYMBOL",
                   "name": "identifier"

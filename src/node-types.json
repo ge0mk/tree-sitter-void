@@ -201,7 +201,7 @@
     "type": "bin_literal",
     "named": true,
     "fields": {
-      "suffix": {
+      "postfix": {
         "multiple": false,
         "required": false,
         "types": [
@@ -793,7 +793,7 @@
     "type": "char_literal",
     "named": true,
     "fields": {
-      "suffix": {
+      "postfix": {
         "multiple": false,
         "required": false,
         "types": [
@@ -907,7 +907,7 @@
     "type": "dec_literal",
     "named": true,
     "fields": {
-      "suffix": {
+      "postfix": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1316,6 +1316,16 @@
           }
         ]
       },
+      "comptime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comptime",
+            "named": false
+          }
+        ]
+      },
       "cond": {
         "multiple": false,
         "required": true,
@@ -1464,108 +1474,129 @@
   {
     "type": "expr_stmt",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "anonymous_function_expr",
-          "named": true
-        },
-        {
-          "type": "array_expr",
-          "named": true
-        },
-        {
-          "type": "bin_literal",
-          "named": true
-        },
-        {
-          "type": "binary_expr",
-          "named": true
-        },
-        {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
-          "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
-          "named": true
-        },
-        {
-          "type": "dec_literal",
-          "named": true
-        },
-        {
-          "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
-          "named": true
-        },
-        {
-          "type": "function_reference_expr",
-          "named": true
-        },
-        {
-          "type": "hex_literal",
-          "named": true
-        },
-        {
-          "type": "index_expr",
-          "named": true
-        },
-        {
-          "type": "inline_if_expr",
-          "named": true
-        },
-        {
-          "type": "match_expr",
-          "named": true
-        },
-        {
-          "type": "member_access_expr",
-          "named": true
-        },
-        {
-          "type": "name",
-          "named": true
-        },
-        {
-          "type": "named_tuple_expr",
-          "named": true
-        },
-        {
-          "type": "namespace_expr",
-          "named": true
-        },
-        {
-          "type": "oct_literal",
-          "named": true
-        },
-        {
-          "type": "postfix_expr",
-          "named": true
-        },
-        {
-          "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "unnamed_tuple_expr",
-          "named": true
-        }
-      ]
+    "fields": {
+      "comptime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comptime",
+            "named": false
+          }
+        ]
+      },
+      "discard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "discard",
+            "named": false
+          }
+        ]
+      },
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "anonymous_function_expr",
+            "named": true
+          },
+          {
+            "type": "array_expr",
+            "named": true
+          },
+          {
+            "type": "bin_literal",
+            "named": true
+          },
+          {
+            "type": "binary_expr",
+            "named": true
+          },
+          {
+            "type": "bool_literal",
+            "named": true
+          },
+          {
+            "type": "call_expr",
+            "named": true
+          },
+          {
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "dec_literal",
+            "named": true
+          },
+          {
+            "type": "dict_expr",
+            "named": true
+          },
+          {
+            "type": "empty_tuple_expr",
+            "named": true
+          },
+          {
+            "type": "function_reference_expr",
+            "named": true
+          },
+          {
+            "type": "hex_literal",
+            "named": true
+          },
+          {
+            "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "inline_if_expr",
+            "named": true
+          },
+          {
+            "type": "match_expr",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "named_tuple_expr",
+            "named": true
+          },
+          {
+            "type": "namespace_expr",
+            "named": true
+          },
+          {
+            "type": "oct_literal",
+            "named": true
+          },
+          {
+            "type": "postfix_expr",
+            "named": true
+          },
+          {
+            "type": "prefix_expr",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unnamed_tuple_expr",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1594,6 +1625,30 @@
           {
             "type": "identifier",
             "named": true
+          }
+        ]
+      },
+      "capture_kind": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "&",
+            "named": false
+          },
+          {
+            "type": "&&",
+            "named": false
+          }
+        ]
+      },
+      "comptime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comptime",
+            "named": false
           }
         ]
       },
@@ -1723,6 +1778,16 @@
           }
         ]
       },
+      "comptime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comptime",
+            "named": false
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1831,7 +1896,7 @@
     "type": "hex_literal",
     "named": true,
     "fields": {
-      "suffix": {
+      "postfix": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1847,6 +1912,16 @@
     "type": "if_stmt",
     "named": true,
     "fields": {
+      "comptime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comptime",
+            "named": false
+          }
+        ]
+      },
       "cond": {
         "multiple": false,
         "required": true,
@@ -3727,7 +3802,7 @@
     "type": "oct_literal",
     "named": true,
     "fields": {
-      "suffix": {
+      "postfix": {
         "multiple": false,
         "required": false,
         "types": [
@@ -4339,7 +4414,7 @@
     "type": "string_literal",
     "named": true,
     "fields": {
-      "suffix": {
+      "postfix": {
         "multiple": false,
         "required": false,
         "types": [
@@ -5041,6 +5116,20 @@
           }
         ]
       },
+      "capture_kind": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "&",
+            "named": false
+          },
+          {
+            "type": "&&",
+            "named": false
+          }
+        ]
+      },
       "initializer": {
         "multiple": false,
         "required": true,
@@ -5340,6 +5429,16 @@
           {
             "type": "compound_stmt",
             "named": true
+          }
+        ]
+      },
+      "comptime": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "comptime",
+            "named": false
           }
         ]
       },

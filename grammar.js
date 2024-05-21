@@ -56,7 +56,7 @@ module.exports = grammar({
     compound_stmt: $ => seq('{', repeat($.stmt), '}'),
 
     if_stmt: $ => prec.left(seq(
-      optional('comptime'),
+      optional(field('comptime', 'comptime')),
       'if', field('cond', $.expr),
       field('then', $.compound_stmt),
       optional(seq(
@@ -81,19 +81,22 @@ module.exports = grammar({
       optional(seq(':', field('type', $.type))),
       '=', field('initializer', $.expr),
       'else',
-      optional(seq(':', optional(choice('&', '&&')), field('capture', $.identifier))),
+      optional(seq(':',
+        optional(field('capture_kind', choice('&', '&&'))),
+        field('capture', $.identifier)
+      )),
       field('body', $.compound_stmt)
     )),
 
     while_stmt: $ => seq(
-      optional('comptime'),
+      optional(field('comptime', 'comptime')),
       'while',
       field('cond', $.expr),
       field('body', $.compound_stmt)
     ),
 
     do_while_stmt: $ => seq(
-      optional('comptime'),
+      optional(field('comptime', 'comptime')),
       'do',
       field('body', $.compound_stmt),
       'while',
@@ -102,9 +105,9 @@ module.exports = grammar({
     ),
 
     for_stmt: $ => seq(
-      optional('comptime'),
+      optional(field('comptime', 'comptime')),
       'for',
-      optional(choice('&', '&&')),
+      optional(field('capture_kind', choice('&', '&&'))),
       field('capture', $.identifier),
       'in',
       field('range', $.expr),
@@ -117,7 +120,12 @@ module.exports = grammar({
     return_stmt: $ => prec.left(seq('return', optional($.expr), optional(';'))),
     throw_stmt: $ => seq('throw', $.expr, optional(';')),
     defer_stmt: $ => seq('defer', $.stmt),
-    expr_stmt: $ => seq(optional('comptime'), optional('discard'), $.expr, optional(';')),
+    expr_stmt: $ => seq(
+      optional(field('comptime', 'comptime')),
+      optional(field('discard', 'discard')),
+      field('expr', $.expr),
+      optional(';')
+    ),
 
     decl: $ => seq(
       optional(field('annotations', $.annotations)),
@@ -161,7 +169,7 @@ module.exports = grammar({
     ),
 
     function_decl: $ => seq(
-      optional('comptime'),
+      optional(field('comptime', 'comptime')),
       'func',
       field('name', choice($.identifier, $.operator_name)),
       field('signature', $.function_signature),
