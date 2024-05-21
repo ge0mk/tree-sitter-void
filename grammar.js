@@ -24,8 +24,9 @@ module.exports = grammar({
     source_file: $ => repeat($.stmt),
 
     stmt: $ => choice(
-      $.import_stmt,
+      $.import,
       $.pragma,
+      $.decl,
       $.compound_stmt,
       $.if_stmt,
       $.if_var_stmt,
@@ -40,14 +41,10 @@ module.exports = grammar({
       $.throw_stmt,
       $.defer_stmt,
       $.expr_stmt,
-      $.var_decl,
-      $.function_decl,
-      $.type_decl,
-      $.type_alias,
       $.variant_case_decl,
     ),
 
-    import_stmt: $ => seq(
+    import: $ => seq(
       'import',
       $.identifier,
       repeat(seq('/', $.identifier)),
@@ -122,24 +119,48 @@ module.exports = grammar({
     defer_stmt: $ => seq('defer', $.stmt),
     expr_stmt: $ => seq(optional('comptime'), optional('discard'), $.expr, optional(';')),
 
-    var_decl: $ => seq(
-      optional($.annotations),
-      optional('private'),
-      optional('comptime'),
-      choice('const', 'var'),
+    decl: $ => seq(
+      optional(field('annotations', $.annotations)),
+      optional(field('template_parameters', $.template_parameter_decl)),
+      optional(field('private', 'private')),
+      choice($.struct_decl, $.enum_decl, $.variant_decl, $.namespace_decl, $.type_alias, $.function_decl, $.var_decl)
+    ),
+
+    struct_decl: $ => seq(
+      'struct',
       field('name', $.identifier),
-      choice(
-        seq(':', field('type', $.type), '=', field('initializer', $.expr)),
-        seq(':', field('type', $.type)),
-        seq('=', field('initializer', $.expr))
-      ),
+      field('body', $.compound_stmt)
+    ),
+
+    enum_decl: $ => seq(
+      'enum',
+      optional(seq(':', field('base_type', $.type))),
+      field('name', $.identifier),
+      field('body', $.compound_stmt)
+    ),
+
+    variant_decl: $ => seq(
+      'variant',
+      optional(seq(':', field('base_type', $.type))),
+      field('name', $.identifier),
+      field('body', $.compound_stmt)
+    ),
+
+    namespace_decl: $ => seq(
+      'namespace',
+      field('name', $.identifier),
+      field('body', $.compound_stmt)
+    ),
+
+    type_alias: $ => seq(
+      'alias',
+      field('name', $.identifier),
+      '=',
+      field('type', $.type),
       optional(';')
     ),
 
     function_decl: $ => seq(
-      optional($.annotations),
-      optional($.template_parameter_decl),
-      optional('private'),
       optional('comptime'),
       'func',
       field('name', choice($.identifier, $.operator_name)),
@@ -149,6 +170,18 @@ module.exports = grammar({
         $.extern_function_body,
         $.compound_stmt
       ))
+    ),
+
+    var_decl: $ => seq(
+      optional(field('comptime', 'comptime')),
+      choice('const', 'var'),
+      field('name', $.identifier),
+      choice(
+        seq(':', field('type', $.type), '=', field('initializer', $.expr)),
+        seq(':', field('type', $.type)),
+        seq('=', field('initializer', $.expr))
+      ),
+      optional(';')
     ),
 
     default_function_body: $ => seq('=', 'default', optional(';')),
@@ -166,28 +199,10 @@ module.exports = grammar({
     ),
 
     parameter_decl: $ => seq(
-      optional($.annotations),
+      optional(field('annotations', $.annotations)),
       field('name', $.identifier),
       seq(':', field('type', $.type)),
       optional(seq('=', field('initializer', $.expr)))
-    ),
-
-    type_decl: $ => seq(
-      optional($.annotations),
-      optional($.template_parameter_decl),
-      optional('private'),
-      choice('struct', 'enum', 'variant', 'namespace'),
-      field('name', $.identifier),
-      optional(seq(':', field('base_type', $.type))),
-      field('body', $.compound_stmt)
-    ),
-
-    type_alias: $ => seq(
-      'alias',
-      field('name', $.identifier),
-      '=',
-      field('type', $.type),
-      optional(';')
     ),
 
     variant_case_decl: $ => seq(
@@ -208,6 +223,7 @@ module.exports = grammar({
     annotation: $ => seq(
       field('key', $.identifier),
       optional(seq(':', field('value', choice(
+        $.bool_literal,
         $.bin_literal,
         $.oct_literal,
         $.dec_literal,
@@ -226,10 +242,11 @@ module.exports = grammar({
     ),
 
     template_parameter: $ => seq(
-      $.identifier,
+      field('name', $.identifier),
       ':',
-      $.identifier,
-      optional(seq('=', $.operand_or_type))
+      field('concept', $.identifier),
+      optional(field('is_variadic', '..')),
+      optional(seq('=', field('value', $.operand_or_type)))
     ),
 
     type: $ => $.operand_or_type,
@@ -394,29 +411,29 @@ module.exports = grammar({
     assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
 
     bool_literal: $ => choice('true', 'false'),
-    bin_literal: $ => prec.right(30, seq(/0b[01]+/, optional(field('suffix', $.identifier)))),
-    oct_literal: $ => prec.right(30, seq(/0o[01234567]+/, optional(field('suffix', $.identifier)))),
-    dec_literal: $ => prec.right(30, seq(/\d+(\.\d+)?([eE][+-]?\d+)?/, optional(field('suffix', $.identifier)))),
-    hex_literal: $ => prec.right(30, seq(/0x(([0-9a-f]+)|([0-9A-F]+))/, optional(field('suffix', $.identifier)))),
+    bin_literal: $ => prec.right(30, seq(field('value', /0b[01]+/), optional(field('postfix', $.identifier)))),
+    oct_literal: $ => prec.right(30, seq(field('value', /0o[01234567]+/), optional(field('postfix', $.identifier)))),
+    dec_literal: $ => prec.right(30, seq(field('value', /\d+(\.\d+)?([eE][+-]?\d+)?/), optional(field('postfix', $.identifier)))),
+    hex_literal: $ => prec.right(30, seq(field('value', /0x(([0-9a-f]+)|([0-9A-F]+))/), optional(field('postfix', $.identifier)))),
 
     char_literal: $ => prec.right(30, seq(
       '\'',
-      repeat1(choice(
-        token.immediate(/[^\n']/),
+      field('value', repeat1(choice(
+        token.immediate(/[^\\'\n]/),
         $.escape_sequence,
-      )),
+      ))),
       '\'',
-      optional(field('suffix', $.identifier))
+      optional(field('postfix', $.identifier))
     )),
 
     string_literal: $ => prec.right(30, seq(
       '\"',
-      repeat(choice(
+      field('value', repeat(choice(
         token.immediate(prec(1, /[^\\"\n]+/)),
         $.escape_sequence,
-      )),
+      ))),
       '\"',
-      optional(field('suffix', $.identifier))
+      optional(field('postfix', $.identifier))
     )),
 
     escape_sequence: $ => token(prec(1, seq(
