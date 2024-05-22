@@ -75,6 +75,8 @@
 
 (parameter_decl (identifier) @variable.parameter)
 (var_decl (identifier) @variable)
+(if_var_stmt (identifier) @variable)
+(var_else_stmt (identifier) @variable)
 (for_stmt (identifier) @variable)
 
 (variant_case_decl (identifier) @constant)
