@@ -142,15 +142,15 @@ module.exports = grammar({
 
     enum_decl: $ => seq(
       'enum',
-      optional(seq(':', field('base_type', $.type))),
       field('name', $.identifier),
+      optional(seq(':', field('base_type', $.type))),
       field('body', $.compound_stmt)
     ),
 
     variant_decl: $ => seq(
       'variant',
-      optional(seq(':', field('base_type', $.type))),
       field('name', $.identifier),
+      optional(seq(':', field('base_type', $.type))),
       field('body', $.compound_stmt)
     ),
 
