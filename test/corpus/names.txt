@@ -42,5 +42,5 @@ foo!<1, 2>
   (expr_stmt
     (name
       (identifier)
-      (dec_literal)
-      (dec_literal))))
+      (number_literal)
+      (number_literal))))

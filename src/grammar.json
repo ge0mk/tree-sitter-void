@@ -1525,6 +1525,22 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "default",
+              "content": {
+                "type": "STRING",
+                "value": "default"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "STRING",
           "value": "case"
         },
@@ -1670,19 +1686,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "bin_literal"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "oct_literal"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "dec_literal"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "hex_literal"
+                        "name": "number_literal"
                       },
                       {
                         "type": "SYMBOL",
@@ -1962,19 +1966,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "bin_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "oct_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dec_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "hex_literal"
+          "name": "number_literal"
         },
         {
           "type": "SYMBOL",
@@ -3763,7 +3755,7 @@
         }
       ]
     },
-    "bin_literal": {
+    "number_literal": {
       "type": "PREC_RIGHT",
       "value": 30,
       "content": {
@@ -3773,107 +3765,25 @@
             "type": "FIELD",
             "name": "value",
             "content": {
-              "type": "PATTERN",
-              "value": "0b[01]+"
-            }
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "postfix",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "identifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "0b[01]+"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "0o[01234567]+"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\d+(\\.\\d+)?([eE][+-]?\\d+)?"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "0x(([0-9a-f]+)|([0-9A-F]+))"
                 }
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "oct_literal": {
-      "type": "PREC_RIGHT",
-      "value": 30,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "value",
-            "content": {
-              "type": "PATTERN",
-              "value": "0o[01234567]+"
-            }
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "postfix",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                }
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "dec_literal": {
-      "type": "PREC_RIGHT",
-      "value": 30,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "value",
-            "content": {
-              "type": "PATTERN",
-              "value": "\\d+(\\.\\d+)?([eE][+-]?\\d+)?"
-            }
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "postfix",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                }
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "hex_literal": {
-      "type": "PREC_RIGHT",
-      "value": 30,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "value",
-            "content": {
-              "type": "PATTERN",
-              "value": "0x(([0-9a-f]+)|([0-9A-F]+))"
+              ]
             }
           },
           {

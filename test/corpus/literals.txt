@@ -16,15 +16,15 @@ false
 
 (source_file
   (expr_stmt
-    (dec_literal))
+    (number_literal))
   (expr_stmt
-    (bin_literal))
+    (number_literal))
   (expr_stmt
-    (oct_literal))
+    (number_literal))
   (expr_stmt
-    (hex_literal))
+    (number_literal))
   (expr_stmt
-    (dec_literal))
+    (number_literal))
   (expr_stmt
     (string_literal))
   (expr_stmt
@@ -45,7 +45,7 @@ with suffix
 ---
 (source_file
   (expr_stmt
-    (dec_literal
+    (number_literal
       (identifier)))
   (expr_stmt
     (string_literal

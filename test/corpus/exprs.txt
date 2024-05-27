@@ -36,8 +36,8 @@ binary operator
 (source_file
   (expr_stmt
     (binary_expr
-      (dec_literal)
-      (dec_literal))))
+      (number_literal)
+      (number_literal))))
 
 
 ==================

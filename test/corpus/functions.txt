@@ -7,13 +7,14 @@ func foo() -> int {}
 ---
 
 (source_file
-  (function_decl
-    (identifier)
-    (function_signature
-      (type
-        (name
-          (identifier))))
-    (compound_stmt)))
+  (decl
+    (function_decl
+      (identifier)
+      (function_signature
+        (type
+          (name
+            (identifier))))
+      (compound_stmt))))
 
 ==================
 template parameters
@@ -25,17 +26,18 @@ func foo() -> T {}
 ---
 
 (source_file
-  (function_decl
+  (decl
     (template_parameter_decl
       (template_parameter
         (identifier)
         (identifier)))
-    (identifier)
-    (function_signature
-      (type
-        (name
-          (identifier))))
-    (compound_stmt)))
+    (function_decl
+      (identifier)
+      (function_signature
+        (type
+          (name
+            (identifier))))
+      (compound_stmt))))
 
 ==================
 annotations
@@ -47,17 +49,18 @@ func foo() -> int {}
 ---
 
 (source_file
-  (function_decl
+  (decl
     (annotations
       (annotation
         (identifier)
         (string_literal)))
-    (identifier)
-    (function_signature
-      (type
-        (name
-          (identifier))))
-    (compound_stmt)))
+    (function_decl
+      (identifier)
+      (function_signature
+        (type
+          (name
+            (identifier))))
+      (compound_stmt))))
 
 ==================
 default body
@@ -68,13 +71,14 @@ func foo() -> int = default
 ---
 
 (source_file
-  (function_decl
-    (identifier)
-    (function_signature
-      (type
-        (name
-          (identifier))))
-    (default_function_body)))
+  (decl
+    (function_decl
+      (identifier)
+      (function_signature
+        (type
+          (name
+            (identifier))))
+      (default_function_body))))
 
 ==================
 extern body
@@ -85,13 +89,14 @@ func foo() -> int = extern
 ---
 
 (source_file
-  (function_decl
-    (identifier)
-    (function_signature
-      (type
-        (name
-          (identifier))))
-    (extern_function_body)))
+  (decl
+    (function_decl
+      (identifier)
+      (function_signature
+        (type
+          (name
+            (identifier))))
+      (extern_function_body))))
 
 ==================
 parameters
@@ -102,23 +107,24 @@ func foo(x: uint, y: int) -> int {}
 ---
 
 (source_file
-  (function_decl
-    (identifier)
-    (function_signature
-      (parameter_decl
-        (identifier)
+  (decl
+    (function_decl
+      (identifier)
+      (function_signature
+        (parameter_decl
+          (identifier)
+          (type
+            (name
+              (identifier))))
+        (parameter_decl
+          (identifier)
+          (type
+            (name
+              (identifier))))
         (type
           (name
             (identifier))))
-      (parameter_decl
-        (identifier)
-        (type
-          (name
-            (identifier))))
-      (type
-        (name
-          (identifier))))
-    (compound_stmt)))
+      (compound_stmt))))
 
 ==================
 operator
@@ -129,10 +135,11 @@ func +() -> int {}
 ---
 
 (source_file
-  (function_decl
-    (operator_name)
-    (function_signature
-      (type
-        (name
-          (identifier))))
-    (compound_stmt)))
+  (decl
+    (function_decl
+      (operator_name)
+      (function_signature
+        (type
+          (name
+            (identifier))))
+      (compound_stmt))))

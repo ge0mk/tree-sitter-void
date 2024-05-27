@@ -214,6 +214,7 @@ module.exports = grammar({
     ),
 
     variant_case_decl: $ => seq(
+      optional(field('default', 'default')),
       'case',
       field('name', $.identifier),
       optional(seq(':', field('type', $.type))),
@@ -232,10 +233,7 @@ module.exports = grammar({
       field('key', $.identifier),
       optional(seq(':', field('value', choice(
         $.bool_literal,
-        $.bin_literal,
-        $.oct_literal,
-        $.dec_literal,
-        $.hex_literal,
+        $.number_literal,
         $.char_literal,
         $.string_literal,
       ))))
@@ -278,10 +276,7 @@ module.exports = grammar({
     operand: $ => choice(
       $.name,
       $.bool_literal,
-      $.bin_literal,
-      $.oct_literal,
-      $.dec_literal,
-      $.hex_literal,
+      $.number_literal,
       $.char_literal,
       $.string_literal,
 
@@ -419,10 +414,15 @@ module.exports = grammar({
     assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
 
     bool_literal: $ => choice('true', 'false'),
-    bin_literal: $ => prec.right(30, seq(field('value', /0b[01]+/), optional(field('postfix', $.identifier)))),
-    oct_literal: $ => prec.right(30, seq(field('value', /0o[01234567]+/), optional(field('postfix', $.identifier)))),
-    dec_literal: $ => prec.right(30, seq(field('value', /\d+(\.\d+)?([eE][+-]?\d+)?/), optional(field('postfix', $.identifier)))),
-    hex_literal: $ => prec.right(30, seq(field('value', /0x(([0-9a-f]+)|([0-9A-F]+))/), optional(field('postfix', $.identifier)))),
+    number_literal: $ => prec.right(30, seq(
+      field('value', choice(
+        /0b[01]+/,
+        /0o[01234567]+/,
+        /\d+(\.\d+)?([eE][+-]?\d+)?/,
+        /0x(([0-9a-f]+)|([0-9A-F]+))/
+      )),
+      optional(field('postfix', $.identifier))
+    )),
 
     char_literal: $ => prec.right(30, seq(
       '\'',
