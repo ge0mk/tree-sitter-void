@@ -291,7 +291,6 @@ module.exports = grammar({
 
       $.named_tuple_expr,
       $.unnamed_tuple_expr,
-      $.empty_tuple_expr,
       $.array_expr,
       $.dict_expr,
       $.match_expr,
@@ -363,9 +362,7 @@ module.exports = grammar({
       field('key', $.identifier), ':', field('value', $.expr),
     ),
 
-    unnamed_tuple_expr: $ => seq('(', $.expr_list, ')'),
-    empty_tuple_expr: $ => seq('(', ')'),
-
+    unnamed_tuple_expr: $ => seq('(', optional($.expr_list), ')'),
     array_expr: $ => seq('[', optional($.expr_list), ']'),
 
     dict_expr: $ => seq(

@@ -2010,10 +2010,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "empty_tuple_expr"
-        },
-        {
-          "type": "SYMBOL",
           "name": "array_expr"
         },
         {
@@ -3134,21 +3130,16 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "expr_list"
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        }
-      ]
-    },
-    "empty_tuple_expr": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "("
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "expr_list"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",

@@ -115,10 +115,6 @@
           "named": true
         },
         {
-          "type": "empty_tuple_expr",
-          "named": true
-        },
-        {
           "type": "function_reference_expr",
           "named": true
         },
@@ -207,10 +203,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -450,10 +442,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -556,10 +544,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -640,10 +624,6 @@
         },
         {
           "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
           "named": true
         },
         {
@@ -1010,10 +990,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -1097,10 +1073,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -1231,10 +1203,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -1289,11 +1257,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "empty_tuple_expr",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "enum_decl",
@@ -1385,10 +1348,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -1530,10 +1489,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -1775,10 +1730,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -1927,10 +1878,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -2054,10 +2001,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -2138,10 +2081,6 @@
         },
         {
           "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
           "named": true
         },
         {
@@ -2236,10 +2175,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -2326,10 +2261,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -2413,10 +2344,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -2597,10 +2524,6 @@
           "named": true
         },
         {
-          "type": "empty_tuple_expr",
-          "named": true
-        },
-        {
           "type": "function_reference_expr",
           "named": true
         },
@@ -2772,10 +2695,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -2878,10 +2797,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -2957,10 +2872,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -3063,10 +2974,6 @@
           "named": true
         },
         {
-          "type": "empty_tuple_expr",
-          "named": true
-        },
-        {
           "type": "function_reference_expr",
           "named": true
         },
@@ -3165,10 +3072,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -3301,10 +3204,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -3380,10 +3279,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -3506,10 +3401,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -3629,10 +3520,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -3769,10 +3656,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -3858,10 +3741,6 @@
         },
         {
           "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
           "named": true
         },
         {
@@ -4117,10 +3996,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -4228,10 +4103,6 @@
           "named": true
         },
         {
-          "type": "empty_tuple_expr",
-          "named": true
-        },
-        {
           "type": "function_reference_expr",
           "named": true
         },
@@ -4316,10 +4187,6 @@
         },
         {
           "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
           "named": true
         },
         {
@@ -4409,7 +4276,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "anonymous_function_expr",
@@ -4437,10 +4304,6 @@
         },
         {
           "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
           "named": true
         },
         {
@@ -4542,10 +4405,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -4695,10 +4554,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -4818,10 +4673,6 @@
           },
           {
             "type": "dict_expr",
-            "named": true
-          },
-          {
-            "type": "empty_tuple_expr",
             "named": true
           },
           {
@@ -4993,10 +4844,6 @@
             "named": true
           },
           {
-            "type": "empty_tuple_expr",
-            "named": true
-          },
-          {
             "type": "function_reference_expr",
             "named": true
           },
@@ -5086,10 +4933,6 @@
         },
         {
           "type": "dict_expr",
-          "named": true
-        },
-        {
-          "type": "empty_tuple_expr",
           "named": true
         },
         {
