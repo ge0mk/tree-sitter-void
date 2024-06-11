@@ -55,4 +55,5 @@ foo.operator +()
         (name
             (identifier))
         (name
-          (operator_name))))))
+          (operator_name)))
+        (tuple_expr))))

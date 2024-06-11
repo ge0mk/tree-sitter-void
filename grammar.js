@@ -11,7 +11,7 @@ module.exports = grammar({
   inline: $ => [
     $.stmt,
     $.expr,
-    $.expr_list,
+    $.literal,
     $.operand,
     $.operand_or_type,
     $.prefix_operator,
@@ -231,12 +231,7 @@ module.exports = grammar({
 
     annotation: $ => seq(
       field('key', $.identifier),
-      optional(seq(':', field('value', choice(
-        $.bool_literal,
-        $.number_literal,
-        $.char_literal,
-        $.string_literal,
-      ))))
+      optional(seq(':', field('value', $.literal)))
     ),
 
     template_parameter_decl: $ => seq(
@@ -271,14 +266,9 @@ module.exports = grammar({
       $.inline_if_expr,
     ),
 
-    expr_list: $ => seq($.expr, repeat(seq(',', $.expr)), optional(',')),
-
     operand: $ => choice(
       $.name,
-      $.bool_literal,
-      $.number_literal,
-      $.char_literal,
-      $.string_literal,
+      $.literal,
 
       $.namespace_expr,
 
@@ -290,7 +280,7 @@ module.exports = grammar({
       $.prefix_expr,
 
       $.named_tuple_expr,
-      $.unnamed_tuple_expr,
+      $.tuple_expr,
       $.array_expr,
       $.dict_expr,
       $.match_expr,
@@ -306,8 +296,8 @@ module.exports = grammar({
 
     namespace_expr: $ => prec.left(20, seq(field('lhs', $.operand), '::', field('rhs', $.operand))),
     member_access_expr: $ => prec.left(19, seq(field('lhs', $.operand), '.', field('rhs', $.operand))),
-    call_expr: $ => prec.left(18, seq(field('callee', $.operand), '(', optional($.expr_list), ')')),
-    index_expr: $ => prec.left(18, seq(field('object', $.operand), '[', $.expr_list, ']')),
+    call_expr: $ => prec.left(18, seq(field('callee', $.operand), field('parameters', $.tuple_expr))),
+    index_expr: $ => prec.left(18, seq(field('object', $.operand), field('parameters', $.array_expr))),
 
     postfix_expr: $ => prec.left(17, seq(field('operand', $.operand), field('op', choice('++', '--')))),
     prefix_expr: $ => prec.right(16, seq(field('op', $.prefix_operator), field('operand', $.operand))),
@@ -362,8 +352,8 @@ module.exports = grammar({
       field('key', $.identifier), ':', field('value', $.expr),
     ),
 
-    unnamed_tuple_expr: $ => seq('(', optional($.expr_list), ')'),
-    array_expr: $ => seq('[', optional($.expr_list), ']'),
+    tuple_expr: $ => seq('(', optional(seq($.expr, repeat(seq(',', $.expr)))), ')'),
+    array_expr: $ => seq('[', optional(seq($.expr, repeat(seq(',', $.expr)))), ']'),
 
     dict_expr: $ => seq(
       '{',
@@ -396,9 +386,8 @@ module.exports = grammar({
     match_default_case: $ => seq('default', '->', field('body', $.stmt)),
 
     anonymous_function_expr: $ => seq('func', field('signature', $.function_signature), field('body', $.compound_stmt)),
-    function_reference_expr: $ => seq('func', '&', field('name', $.name), '(', optional(seq($.type, repeat(seq(',', $.type)))), ')'),
-
-    function_type: $ => prec(2, seq($.unnamed_tuple_expr, '->', field('return_type', $.type))),
+    function_reference_expr: $ => seq('func', '&', field('name', $.name), $.tuple_expr),
+    function_type: $ => prec(2, seq($.tuple_expr, '->', field('return_type', $.type))),
 
     identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
     operator_name: $ => choice(
@@ -409,6 +398,13 @@ module.exports = grammar({
 
     prefix_operator: $ => choice('-', '~', '!', '&', '&&', 'try', 'must'),
     assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
+
+    literal: $ => choice(
+      $.bool_literal,
+      $.number_literal,
+      $.char_literal,
+      $.string_literal,
+    ),
 
     bool_literal: $ => choice('true', 'false'),
     number_literal: $ => prec.right(30, seq(
