@@ -298,7 +298,7 @@
                   "name": "type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "operand"
                   }
                 }
               ]
@@ -410,7 +410,7 @@
                     "name": "type",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "type"
+                      "name": "operand"
                     }
                   }
                 ]
@@ -1013,7 +1013,7 @@
                   "name": "base_type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "operand"
                   }
                 }
               ]
@@ -1063,7 +1063,7 @@
                   "name": "base_type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "operand"
                   }
                 }
               ]
@@ -1132,7 +1132,7 @@
           "name": "type",
           "content": {
             "type": "SYMBOL",
-            "name": "type"
+            "name": "operand"
           }
         },
         {
@@ -1275,7 +1275,7 @@
                   "name": "type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "operand"
                   }
                 },
                 {
@@ -1304,7 +1304,7 @@
                   "name": "type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "operand"
                   }
                 }
               ]
@@ -1438,14 +1438,14 @@
         },
         {
           "type": "STRING",
-          "value": "->"
+          "value": "=>"
         },
         {
           "type": "FIELD",
           "name": "return_type",
           "content": {
             "type": "SYMBOL",
-            "name": "type"
+            "name": "operand"
           }
         }
       ]
@@ -1489,7 +1489,7 @@
               "name": "type",
               "content": {
                 "type": "SYMBOL",
-                "name": "type"
+                "name": "operand"
               }
             }
           ]
@@ -1567,7 +1567,7 @@
                   "name": "type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "operand"
                   }
                 }
               ]
@@ -1782,7 +1782,7 @@
                   "name": "value",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "operand_or_type"
+                    "name": "operand"
                   }
                 }
               ]
@@ -1793,10 +1793,6 @@
           ]
         }
       ]
-    },
-    "type": {
-      "type": "SYMBOL",
-      "name": "operand_or_type"
     },
     "name": {
       "type": "PREC_RIGHT",
@@ -1850,7 +1846,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "operand_or_type"
+                    "name": "operand"
                   },
                   {
                     "type": "REPEAT",
@@ -1863,7 +1859,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "operand_or_type"
+                          "name": "operand"
                         }
                       ]
                     }
@@ -1961,15 +1957,6 @@
         {
           "type": "SYMBOL",
           "name": "function_reference_expr"
-        }
-      ]
-    },
-    "operand_or_type": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "operand"
         },
         {
           "type": "SYMBOL",
@@ -2174,7 +2161,7 @@
                 "name": "rhs",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "type"
+                  "name": "operand"
                 }
               }
             ]
@@ -2207,7 +2194,7 @@
                 "name": "rhs",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "type"
+                  "name": "operand"
                 }
               }
             ]
@@ -3393,29 +3380,29 @@
       ]
     },
     "function_type": {
-      "type": "PREC",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "parameter_types",
+          "content": {
             "type": "SYMBOL",
             "name": "tuple_expr"
-          },
-          {
-            "type": "STRING",
-            "value": "->"
-          },
-          {
-            "type": "FIELD",
-            "name": "return_type",
-            "content": {
-              "type": "SYMBOL",
-              "name": "type"
-            }
           }
-        ]
-      }
+        },
+        {
+          "type": "STRING",
+          "value": "=>"
+        },
+        {
+          "type": "FIELD",
+          "name": "return_type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "operand"
+          }
+        }
+      ]
     },
     "identifier": {
       "type": "PATTERN",
@@ -3482,6 +3469,10 @@
         },
         {
           "type": "STRING",
+          "value": "??"
+        },
+        {
+          "type": "STRING",
           "value": "="
         },
         {
@@ -3495,10 +3486,6 @@
         {
           "type": "STRING",
           "value": "^="
-        },
-        {
-          "type": "STRING",
-          "value": "~="
         },
         {
           "type": "STRING",
@@ -3530,6 +3517,18 @@
         },
         {
           "type": "STRING",
+          "value": "??="
+        },
+        {
+          "type": "STRING",
+          "value": "=="
+        },
+        {
+          "type": "STRING",
+          "value": "!="
+        },
+        {
+          "type": "STRING",
           "value": "<"
         },
         {
@@ -3546,14 +3545,6 @@
         },
         {
           "type": "STRING",
-          "value": "=="
-        },
-        {
-          "type": "STRING",
-          "value": "!="
-        },
-        {
-          "type": "STRING",
           "value": "<=>"
         },
         {
@@ -3563,6 +3554,14 @@
         {
           "type": "STRING",
           "value": "[]"
+        },
+        {
+          "type": "STRING",
+          "value": "as"
+        },
+        {
+          "type": "STRING",
+          "value": "is"
         }
       ]
     },
@@ -3612,6 +3611,26 @@
         },
         {
           "type": "STRING",
+          "value": "&="
+        },
+        {
+          "type": "STRING",
+          "value": "|="
+        },
+        {
+          "type": "STRING",
+          "value": "^="
+        },
+        {
+          "type": "STRING",
+          "value": "<<="
+        },
+        {
+          "type": "STRING",
+          "value": ">>="
+        },
+        {
+          "type": "STRING",
           "value": "+="
         },
         {
@@ -3629,26 +3648,6 @@
         {
           "type": "STRING",
           "value": "%="
-        },
-        {
-          "type": "STRING",
-          "value": "&="
-        },
-        {
-          "type": "STRING",
-          "value": "^="
-        },
-        {
-          "type": "STRING",
-          "value": "|="
-        },
-        {
-          "type": "STRING",
-          "value": "<<="
-        },
-        {
-          "type": "STRING",
-          "value": ">>="
         },
         {
           "type": "STRING",
@@ -3954,7 +3953,6 @@
     "expr",
     "literal",
     "operand",
-    "operand_or_type",
     "prefix_operator",
     "assignment_operator"
   ],

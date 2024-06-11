@@ -13,7 +13,6 @@ module.exports = grammar({
     $.expr,
     $.literal,
     $.operand,
-    $.operand_or_type,
     $.prefix_operator,
     $.assignment_operator,
   ],
@@ -67,7 +66,7 @@ module.exports = grammar({
 
     if_var_stmt: $ => seq(
       'if', choice('const', 'var'), field('name', $.identifier),
-      optional(seq(':', field('type', $.type))),
+      optional(seq(':', field('type', $.operand))),
       '=', field('initializer', $.expr),
       field('body', $.compound_stmt),
       optional(seq(
@@ -78,7 +77,7 @@ module.exports = grammar({
 
     var_else_stmt: $ => prec(1, seq(
       choice('const', 'var'), field('name', $.identifier),
-      optional(seq(':', field('type', $.type))),
+      optional(seq(':', field('type', $.operand))),
       '=', field('initializer', $.expr),
       'else',
       optional(seq(':',
@@ -143,14 +142,14 @@ module.exports = grammar({
     enum_decl: $ => seq(
       'enum',
       field('name', $.identifier),
-      optional(seq(':', field('base_type', $.type))),
+      optional(seq(':', field('base_type', $.operand))),
       field('body', $.compound_stmt)
     ),
 
     variant_decl: $ => seq(
       'variant',
       field('name', $.identifier),
-      optional(seq(':', field('base_type', $.type))),
+      optional(seq(':', field('base_type', $.operand))),
       field('body', $.compound_stmt)
     ),
 
@@ -164,7 +163,7 @@ module.exports = grammar({
       'alias',
       field('name', $.identifier),
       '=',
-      field('type', $.type),
+      field('type', $.operand),
       optional(';')
     ),
 
@@ -185,8 +184,8 @@ module.exports = grammar({
       choice('const', 'var'),
       field('name', $.identifier),
       choice(
-        seq(':', field('type', $.type), '=', field('initializer', $.expr)),
-        seq(':', field('type', $.type)),
+        seq(':', field('type', $.operand), '=', field('initializer', $.expr)),
+        seq(':', field('type', $.operand)),
         seq('=', field('initializer', $.expr))
       ),
       optional(';')
@@ -202,14 +201,14 @@ module.exports = grammar({
         repeat(seq(',', $.parameter_decl))
       )),
       ')',
-      '->',
-      field('return_type', $.type)
+      '=>',
+      field('return_type', $.operand)
     ),
 
     parameter_decl: $ => seq(
       optional(field('annotations', $.annotations)),
       field('name', $.identifier),
-      seq(':', field('type', $.type)),
+      seq(':', field('type', $.operand)),
       optional(seq('=', field('initializer', $.expr)))
     ),
 
@@ -217,7 +216,7 @@ module.exports = grammar({
       optional(field('default', 'default')),
       'case',
       field('name', $.identifier),
-      optional(seq(':', field('type', $.type))),
+      optional(seq(':', field('type', $.operand))),
       optional(seq('=', field('id', $.expr))),
       optional(';')
     ),
@@ -247,17 +246,15 @@ module.exports = grammar({
       ':',
       field('concept', $.identifier),
       optional(field('is_variadic', '..')),
-      optional(seq('=', field('value', $.operand_or_type)))
+      optional(seq('=', field('value', $.operand)))
     ),
-
-    type: $ => $.operand_or_type,
 
     name: $ => prec.right(20, seq(
       choice(
         field('name', $.identifier),
         seq('operator', field('name', $.operator_name))
       ),
-      optional(seq('!', '<', $.operand_or_type, repeat(seq(',', $.operand_or_type)), '>')),
+      optional(seq('!', '<', $.operand, repeat(seq(',', $.operand)), '>')),
     )),
 
     expr: $ => choice(
@@ -287,10 +284,6 @@ module.exports = grammar({
 
       $.anonymous_function_expr,
       $.function_reference_expr,
-    ),
-
-    operand_or_type: $ => choice(
-      $.operand,
       $.function_type
     ),
 
@@ -303,8 +296,8 @@ module.exports = grammar({
     prefix_expr: $ => prec.right(16, seq(field('op', $.prefix_operator), field('operand', $.operand))),
 
     binary_expr: $ => choice(
-      prec.left(15, seq(field('lhs', $.expr), field('op', 'is'), field('rhs', $.type))),
-      prec.left(15, seq(field('lhs', $.expr), field('op', 'as'), field('rhs', $.type))),
+      prec.left(15, seq(field('lhs', $.expr), field('op', 'is'), field('rhs', $.operand))),
+      prec.left(15, seq(field('lhs', $.expr), field('op', 'as'), field('rhs', $.operand))),
 
       prec.left(14, seq(field('lhs', $.expr), field('op', '??'), field('rhs', $.expr))),
 
@@ -387,17 +380,17 @@ module.exports = grammar({
 
     anonymous_function_expr: $ => seq('func', field('signature', $.function_signature), field('body', $.compound_stmt)),
     function_reference_expr: $ => seq('func', '&', field('name', $.name), $.tuple_expr),
-    function_type: $ => prec(2, seq($.tuple_expr, '->', field('return_type', $.type))),
+    function_type: $ => seq(field('parameter_types', $.tuple_expr), '=>', field('return_type', $.operand)),
 
     identifier: $ => /[a-zA-Z_][0-9a-zA-Z_]*/,
     operator_name: $ => choice(
-      '&', '|', '^', '~', '<<', '>>', '+', '-', '*', '/', '%', '++', '--', '..',
-      '=', '&=', '|=', '^=', '~=', '<<=', '>>=', '+=', '-=', '*=', '/=', '%=',
-      '<', '<=', '>', '>=', '==', '!=', '<=>', '()', '[]'
+      '&', '|', '^', '~', '<<', '>>', '+', '-', '*', '/', '%', '++', '--', '..', '??',
+      '=', '&=', '|=', '^=', '<<=', '>>=', '+=', '-=', '*=', '/=', '%=', '??=',
+      '==', '!=', '<', '<=', '>', '>=', '<=>', '()', '[]', 'as', 'is'
     ),
 
     prefix_operator: $ => choice('-', '~', '!', '&', '&&', 'try', 'must'),
-    assignment_operator: $ => choice('=', ':=', '+=', '-=', '*=', '/=', '%=', '&=', '^=', '|=', '<<=', '>>=', '??='),
+    assignment_operator: $ => choice('=', ':=', '&=', '|=', '^=', '<<=', '>>=', '+=', '-=', '*=', '/=', '%=', '??='),
 
     literal: $ => choice(
       $.bool_literal,

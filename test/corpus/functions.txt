@@ -2,7 +2,7 @@
 basic
 ==================
 
-func foo() -> int {}
+func foo() => int {}
 
 ---
 
@@ -11,9 +11,8 @@ func foo() -> int {}
     (function_decl
       (identifier)
       (function_signature
-        (type
-          (name
-            (identifier))))
+        (name
+          (identifier)))
       (compound_stmt))))
 
 ==================
@@ -21,7 +20,7 @@ template parameters
 ==================
 
 template <T: type>
-func foo() -> T {}
+func foo() => T {}
 
 ---
 
@@ -34,9 +33,8 @@ func foo() -> T {}
     (function_decl
       (identifier)
       (function_signature
-        (type
-          (name
-            (identifier))))
+        (name
+          (identifier)))
       (compound_stmt))))
 
 ==================
@@ -44,7 +42,7 @@ annotations
 ==================
 
 @[extern_name: "foo"]
-func foo() -> int {}
+func foo() => int {}
 
 ---
 
@@ -57,16 +55,15 @@ func foo() -> int {}
     (function_decl
       (identifier)
       (function_signature
-        (type
-          (name
-            (identifier))))
+        (name
+          (identifier)))
       (compound_stmt))))
 
 ==================
 default body
 ==================
 
-func foo() -> int = default
+func foo() => int = default
 
 ---
 
@@ -75,16 +72,15 @@ func foo() -> int = default
     (function_decl
       (identifier)
       (function_signature
-        (type
-          (name
-            (identifier))))
+        (name
+          (identifier)))
       (default_function_body))))
 
 ==================
 extern body
 ==================
 
-func foo() -> int = extern
+func foo() => int = extern
 
 ---
 
@@ -93,16 +89,15 @@ func foo() -> int = extern
     (function_decl
       (identifier)
       (function_signature
-        (type
-          (name
-            (identifier))))
+        (name
+          (identifier)))
       (extern_function_body))))
 
 ==================
 parameters
 ==================
 
-func foo(x: uint, y: int) -> int {}
+func foo(x: uint, y: int) => int {}
 
 ---
 
@@ -113,24 +108,21 @@ func foo(x: uint, y: int) -> int {}
       (function_signature
         (parameter_decl
           (identifier)
-          (type
-            (name
-              (identifier))))
+          (name
+            (identifier)))
         (parameter_decl
           (identifier)
-          (type
-            (name
-              (identifier))))
-        (type
           (name
-            (identifier))))
+            (identifier)))
+        (name
+          (identifier)))
       (compound_stmt))))
 
 ==================
 operator
 ==================
 
-func +() -> int {}
+func +() => int {}
 
 ---
 
@@ -139,7 +131,6 @@ func +() -> int {}
     (function_decl
       (operator_name)
       (function_signature
-        (type
-          (name
-            (identifier))))
+        (name
+          (identifier)))
       (compound_stmt))))
