@@ -127,7 +127,7 @@ module.exports = grammar({
     ),
 
     decl: $ => seq(
-      optional(field('annotations', $.annotations)),
+      optional(field('attributes', $.attributes)),
       optional(field('template_parameters', $.template_parameter_decl)),
       optional(field('private', 'private')),
       choice($.struct_decl, $.enum_decl, $.variant_decl, $.namespace_decl, $.type_alias, $.function_decl, $.var_decl)
@@ -206,7 +206,7 @@ module.exports = grammar({
     ),
 
     parameter_decl: $ => seq(
-      optional(field('annotations', $.annotations)),
+      optional(field('attributes', $.attributes)),
       field('name', $.identifier),
       seq(':', field('type', $.operand)),
       optional(seq('=', field('initializer', $.expr)))
@@ -221,16 +221,16 @@ module.exports = grammar({
       optional(';')
     ),
 
-    annotations: $ => seq(
+    attributes: $ => seq(
       '@', '[',
-      $.annotation,
-      repeat(seq(',', $.annotation)),
+      $.attribute,
+      repeat(seq(',', $.attribute)),
       ']'
     ),
 
-    annotation: $ => seq(
-      field('key', $.identifier),
-      optional(seq(':', field('value', $.literal)))
+    attribute: $ => seq(
+      field('name', $.identifier),
+      optional(seq(':', field('value', $.operand)))
     ),
 
     template_parameter_decl: $ => seq(

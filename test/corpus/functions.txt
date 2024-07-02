@@ -38,7 +38,7 @@ func foo() => T {}
       (compound_stmt))))
 
 ==================
-annotations
+attributes
 ==================
 
 @[extern_name: "foo"]
@@ -48,8 +48,8 @@ func foo() => int {}
 
 (source_file
   (decl
-    (annotations
-      (annotation
+    (attributes
+      (attribute
         (identifier)
         (string_literal)))
     (function_decl

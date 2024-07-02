@@ -94,4 +94,6 @@
 (call_expr callee: (member_access_expr rhs: (name (identifier) @function)))
 (call_expr callee: (namespace_expr rhs: (name (identifier) @function)))
 
+(attribute name: _ @string)
+
 (comment) @comment

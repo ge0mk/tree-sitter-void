@@ -1,58 +1,5 @@
 [
   {
-    "type": "annotation",
-    "named": true,
-    "fields": {
-      "key": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
-            "type": "char_literal",
-            "named": true
-          },
-          {
-            "type": "number_literal",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "annotations",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "annotation",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "anonymous_function_expr",
     "named": true,
     "fields": {
@@ -168,6 +115,119 @@
         },
         {
           "type": "tuple_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attribute",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "anonymous_function_expr",
+            "named": true
+          },
+          {
+            "type": "array_expr",
+            "named": true
+          },
+          {
+            "type": "bool_literal",
+            "named": true
+          },
+          {
+            "type": "call_expr",
+            "named": true
+          },
+          {
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "dict_expr",
+            "named": true
+          },
+          {
+            "type": "function_reference_expr",
+            "named": true
+          },
+          {
+            "type": "function_type",
+            "named": true
+          },
+          {
+            "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "match_expr",
+            "named": true
+          },
+          {
+            "type": "member_access_expr",
+            "named": true
+          },
+          {
+            "type": "name",
+            "named": true
+          },
+          {
+            "type": "named_tuple_expr",
+            "named": true
+          },
+          {
+            "type": "namespace_expr",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "postfix_expr",
+            "named": true
+          },
+          {
+            "type": "prefix_expr",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "tuple_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "attributes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
           "named": true
         }
       ]
@@ -735,12 +795,12 @@
     "type": "decl",
     "named": true,
     "fields": {
-      "annotations": {
+      "attributes": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "annotations",
+            "type": "attributes",
             "named": true
           }
         ]
@@ -3578,12 +3638,12 @@
     "type": "parameter_decl",
     "named": true,
     "fields": {
-      "annotations": {
+      "attributes": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "annotations",
+            "type": "attributes",
             "named": true
           }
         ]
