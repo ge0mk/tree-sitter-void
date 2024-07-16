@@ -51,7 +51,8 @@ func foo() => int {}
     (attributes
       (attribute
         (identifier)
-        (string_literal)))
+        (literal
+          (string_literal))))
     (function_decl
       (identifier)
       (function_signature

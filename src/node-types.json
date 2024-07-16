@@ -46,15 +46,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -78,6 +70,10 @@
           "named": true
         },
         {
+          "type": "literal",
+          "named": true
+        },
+        {
           "type": "match_expr",
           "named": true
         },
@@ -98,19 +94,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {
@@ -147,15 +135,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -172,6 +152,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -195,19 +179,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -254,15 +230,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -286,6 +254,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -306,19 +278,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -494,15 +458,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -526,6 +482,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -546,19 +506,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -596,15 +548,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -621,6 +565,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -644,19 +592,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -680,27 +620,16 @@
   {
     "type": "char_literal",
     "named": true,
-    "fields": {
-      "postfix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "escape_sequence",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -970,15 +899,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1002,6 +923,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -1022,19 +947,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1060,15 +977,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1092,6 +1001,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -1112,19 +1025,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1191,15 +1096,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1223,6 +1120,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -1243,19 +1144,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1283,15 +1176,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1308,6 +1193,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -1331,19 +1220,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1415,15 +1296,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1447,6 +1320,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -1467,19 +1344,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1560,15 +1429,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1592,6 +1453,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -1612,19 +1477,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1736,15 +1593,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1761,6 +1610,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -1784,19 +1637,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1844,15 +1689,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1869,6 +1706,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -1892,19 +1733,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -1946,15 +1779,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -1978,6 +1803,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -1998,19 +1827,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -2098,15 +1919,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2130,6 +1943,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -2150,19 +1967,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -2194,15 +2003,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2219,6 +2020,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -2242,19 +2047,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -2297,15 +2094,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2322,6 +2111,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -2345,19 +2138,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -2399,15 +2184,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2431,6 +2208,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -2451,19 +2232,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -2489,15 +2262,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2521,6 +2286,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -2541,19 +2310,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -2579,15 +2340,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2611,6 +2364,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -2631,10 +2388,6 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
@@ -2643,11 +2396,45 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "tuple_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "literal",
+    "named": true,
+    "fields": {
+      "postfix": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bool_literal",
             "named": true
           },
           {
-            "type": "tuple_expr",
+            "type": "char_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "string_literal",
             "named": true
           }
         ]
@@ -2760,15 +2547,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -2785,6 +2564,10 @@
         },
         {
           "type": "index_expr",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         },
         {
@@ -2808,19 +2591,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {
@@ -2935,15 +2710,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -2967,6 +2734,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -2987,19 +2758,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3041,15 +2804,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3066,6 +2821,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -3089,19 +2848,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3123,15 +2874,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3148,6 +2891,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -3171,19 +2918,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3226,15 +2965,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -3251,6 +2982,10 @@
         },
         {
           "type": "index_expr",
+          "named": true
+        },
+        {
+          "type": "literal",
           "named": true
         },
         {
@@ -3274,19 +3009,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {
@@ -3327,15 +3054,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3359,6 +3078,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -3379,19 +3102,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3460,15 +3175,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3485,6 +3192,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -3508,19 +3219,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3542,15 +3245,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3567,6 +3262,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -3590,19 +3289,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3616,18 +3307,7 @@
   {
     "type": "number_literal",
     "named": true,
-    "fields": {
-      "postfix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
+    "fields": {}
   },
   {
     "type": "operator_name",
@@ -3665,15 +3345,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3697,6 +3369,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -3717,19 +3393,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3761,15 +3429,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3786,6 +3446,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -3809,19 +3473,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -3863,15 +3519,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -3888,6 +3536,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -3911,19 +3563,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -4000,15 +3644,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -4025,6 +3661,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -4048,19 +3688,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -4092,15 +3724,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -4124,6 +3748,10 @@
           "named": true
         },
         {
+          "type": "literal",
+          "named": true
+        },
+        {
           "type": "match_expr",
           "named": true
         },
@@ -4144,19 +3772,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {
@@ -4252,27 +3872,16 @@
   {
     "type": "string_literal",
     "named": true,
-    "fields": {
-      "postfix": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "escape_sequence",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -4348,15 +3957,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -4373,6 +3974,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -4396,19 +4001,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -4455,15 +4052,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -4487,6 +4076,10 @@
           "named": true
         },
         {
+          "type": "literal",
+          "named": true
+        },
+        {
           "type": "match_expr",
           "named": true
         },
@@ -4507,19 +4100,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {
@@ -4550,15 +4135,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -4582,6 +4159,10 @@
           "named": true
         },
         {
+          "type": "literal",
+          "named": true
+        },
+        {
           "type": "match_expr",
           "named": true
         },
@@ -4602,19 +4183,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {
@@ -4651,15 +4224,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -4676,6 +4241,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -4699,19 +4268,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -4753,15 +4314,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -4785,6 +4338,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -4805,19 +4362,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -4849,15 +4398,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -4874,6 +4415,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -4897,19 +4442,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -4975,15 +4512,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -5007,6 +4536,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -5027,19 +4560,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -5071,15 +4596,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -5096,6 +4613,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -5119,19 +4640,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -5173,15 +4686,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -5205,6 +4710,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -5225,19 +4734,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -5269,15 +4770,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -5294,6 +4787,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -5317,19 +4814,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -5357,15 +4846,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -5382,6 +4863,10 @@
           },
           {
             "type": "index_expr",
+            "named": true
+          },
+          {
+            "type": "literal",
             "named": true
           },
           {
@@ -5405,19 +4890,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -5489,15 +4966,7 @@
             "named": true
           },
           {
-            "type": "bool_literal",
-            "named": true
-          },
-          {
             "type": "call_expr",
-            "named": true
-          },
-          {
-            "type": "char_literal",
             "named": true
           },
           {
@@ -5521,6 +4990,10 @@
             "named": true
           },
           {
+            "type": "literal",
+            "named": true
+          },
+          {
             "type": "match_expr",
             "named": true
           },
@@ -5541,19 +5014,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
-            "named": true
-          },
-          {
             "type": "postfix_expr",
             "named": true
           },
           {
             "type": "prefix_expr",
-            "named": true
-          },
-          {
-            "type": "string_literal",
             "named": true
           },
           {
@@ -5585,15 +5050,7 @@
           "named": true
         },
         {
-          "type": "bool_literal",
-          "named": true
-        },
-        {
           "type": "call_expr",
-          "named": true
-        },
-        {
-          "type": "char_literal",
           "named": true
         },
         {
@@ -5617,6 +5074,10 @@
           "named": true
         },
         {
+          "type": "literal",
+          "named": true
+        },
+        {
           "type": "match_expr",
           "named": true
         },
@@ -5637,19 +5098,11 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "postfix_expr",
           "named": true
         },
         {
           "type": "prefix_expr",
-          "named": true
-        },
-        {
-          "type": "string_literal",
           "named": true
         },
         {

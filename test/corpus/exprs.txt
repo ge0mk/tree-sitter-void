@@ -9,7 +9,8 @@ prefix operator
 (source_file
   (expr_stmt
     (prefix_expr
-      (bool_literal))))
+      (literal
+        (bool_literal)))))
 
 ==================
 postfix operator
@@ -36,8 +37,10 @@ binary operator
 (source_file
   (expr_stmt
     (binary_expr
-      (number_literal)
-      (number_literal))))
+      (literal
+        (number_literal))
+      (literal
+        (number_literal)))))
 
 
 ==================

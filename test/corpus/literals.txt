@@ -16,23 +16,32 @@ false
 
 (source_file
   (expr_stmt
-    (number_literal))
+    (literal
+      (number_literal)))
   (expr_stmt
-    (number_literal))
+    (literal
+      (number_literal)))
   (expr_stmt
-    (number_literal))
+    (literal
+      (number_literal)))
   (expr_stmt
-    (number_literal))
+    (literal
+      (number_literal)))
   (expr_stmt
-    (number_literal))
+    (literal
+      (number_literal)))
   (expr_stmt
-    (string_literal))
+    (literal
+      (string_literal)))
   (expr_stmt
-    (char_literal))
+    (literal
+      (char_literal)))
   (expr_stmt
-    (bool_literal))
+    (literal
+      (bool_literal)))
   (expr_stmt
-    (bool_literal)))
+    (literal
+      (bool_literal))))
 
 ==================
 with suffix
@@ -45,11 +54,14 @@ with suffix
 ---
 (source_file
   (expr_stmt
-    (number_literal
+    (literal
+      (number_literal)
       (identifier)))
   (expr_stmt
-    (string_literal
+    (literal
+      (string_literal)
       (identifier)))
   (expr_stmt
-    (char_literal
+    (literal
+      (char_literal)
       (identifier))))

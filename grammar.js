@@ -11,7 +11,6 @@ module.exports = grammar({
   inline: $ => [
     $.stmt,
     $.expr,
-    $.literal,
     $.operand,
     $.prefix_operator,
     $.assignment_operator,
@@ -392,43 +391,40 @@ module.exports = grammar({
     prefix_operator: $ => choice('-', '~', '!', '&', '&&', 'try', 'must'),
     assignment_operator: $ => choice('=', ':=', '&=', '|=', '^=', '<<=', '>>=', '+=', '-=', '*=', '/=', '%=', '??='),
 
-    literal: $ => choice(
-      $.bool_literal,
-      $.number_literal,
-      $.char_literal,
-      $.string_literal,
+    literal: $ => prec.right(32, choice(
+        field('value', $.bool_literal),
+        seq(field('value', $.number_literal), optional(field('postfix', $.identifier))),
+        seq(field('value', $.char_literal), optional(field('postfix', $.identifier))),
+        seq(field('value', $.string_literal), optional(field('postfix', $.identifier)))
+      )
     ),
 
     bool_literal: $ => choice('true', 'false'),
-    number_literal: $ => prec.right(30, seq(
-      field('value', choice(
-        /0b[01]+/,
-        /0o[01234567]+/,
-        /\d+(\.\d+)?([eE][+-]?\d+)?/,
-        /0x(([0-9a-f]+)|([0-9A-F]+))/
-      )),
-      optional(field('postfix', $.identifier))
-    )),
 
-    char_literal: $ => prec.right(30, seq(
+    number_literal: $ => choice(
+      /0b[01]+/,
+      /0o[01234567]+/,
+      /\d+(\.\d+)?([eE][+-]?\d+)?/,
+      /0x(([0-9a-f]+)|([0-9A-F]+))/
+    ),
+
+    char_literal: $ => seq(
       '\'',
-      field('value', repeat1(choice(
+      repeat1(choice(
         token.immediate(/[^\\'\n]/),
         $.escape_sequence,
-      ))),
+      )),
       '\'',
-      optional(field('postfix', $.identifier))
-    )),
+    ),
 
-    string_literal: $ => prec.right(30, seq(
+    string_literal: $ => seq(
       '\"',
-      field('value', repeat(choice(
+      repeat(choice(
         token.immediate(prec(1, /[^\\"\n]+/)),
         $.escape_sequence,
-      ))),
+      )),
       '\"',
-      optional(field('postfix', $.identifier))
-    )),
+    ),
 
     escape_sequence: $ => token(prec(1, seq(
       '\\',

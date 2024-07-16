@@ -85,9 +85,7 @@
 (string_literal) @string.quoted.single
 (escape_sequence) @escape
 
-(number_literal (identifier) @type)
-(char_literal (identifier) @type)
-(string_literal (identifier) @type)
+(literal (identifier) @type)
 
 (call_expr callee: (name (identifier) @function))
 (member_access_expr rhs: (name (identifier) @property))
